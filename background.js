@@ -18,22 +18,22 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
     //was getSelected, changed to tabs.query (working, just sends an 'alert' at least 4-5 times)
 
 chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {
-     //chrome.tabs.getSelected(null, function(tab) { 
+    //chrome.tabs.getSelected(null, function(tab) { 
     chrome.tabs.query({currentWindow: true, active: true}, function(tab){
         if(chrome.tabs.TabStatus = 'complete'){
-            var tabId = tab.id;
-            //var tabTitle = tab.title;
-            var tabUrl = tab.url;
-            chrome.storage.sync.set({'a': tabId, 'b': tabUrl}, function(){
+            var tabId = tab[0].id;
+            var tabTitle = tab[0].title;
+            var tabUrl = tab[0].url;
+            chrome.storage.sync.set({'a': tabId, 'b': tabUrl, 'c': tabTitle}, function(){
                  alert('saved');
              });
-            chrome.storage.sync.get('a', function(data){
+            chrome.storage.sync.get(['a', 'b', 'c'], function(data){
                 // chrome.downloads.download({
                 //     url: "data:text/plain;charset=utf-8," + encodeURIComponent("[InternetShortcut]\r\nURL=" + activeTab.url),
                 //     filename: '/Users/laurasadams/Downloads/TEUA',
                 //     saveAs: true
                 // });
-                alert(data.a + ': ' + tabUrl + ': on: ' + Date.now());
+                alert(data.a + ': ' + data.b + ": " + data.c+ ': on: ' + Date.now());
             })
         }
     });
