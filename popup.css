@@ -1,0 +1,44 @@
+
+body {
+  width: 300px; /* your desired width */
+  height: 150px;
+  position: relative;
+  vertical-align:middle;
+}
+h1 {
+    font-size: 40px;
+    line-height: 15px;
+    padding-left: 20px;
+}
+
+h2 {
+    font-size: 40px;
+    line-height: 15px;
+    padding-left: 20px;
+}
+
+button {
+    font-size: 15px;
+    font-weight: bolder;
+    font-family: Quantify; src: url('Quanitfy.ttf');
+    background-color: red;
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+button:focus {
+    background-color:lawngreen;
+}
+
+/* button:after {
+    display: ;
+} */
+
+img {
+    width: 85px;
+    height: 95x;
+    position: absolute;
+    bottom: 80px;
+    left: 200px;
+}
+/* @font-face {font-family: Quantify; font-weight: bold; src: url('Quantify.ttf');} */
