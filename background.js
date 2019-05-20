@@ -51,18 +51,18 @@ chrome.tabs.onRemoved.addListener(function(){
     })
 })
 
-chrome.tabs.onUpdated.addListener(function() {
-    chrome.tabs.query({currentWindow: true, active: true}, function(tab) {
-        var tabId = tab.id;
-        var tabUrl = tab.url;
-        chrome.storage.sync.set({'a': tabId, 'b': tabUrl}, function(){
-            alert('saved');
-        });
-        chrome.storage.sync.get('h', function(data){
-            alert(data.hi);
-        })
-    });
-});
+// chrome.tabs.onUpdated.addListener(function() {
+//     chrome.tabs.query({currentWindow: true, active: true}, function(tab) {
+//         var tabId = tab.id;
+//         var tabUrl = tab.url;
+//         chrome.storage.sync.set({'a': tabId, 'b': tabUrl}, function(){
+//             alert('saved');
+//         });
+//         chrome.storage.sync.get('h', function(data){
+//             alert(data.hi);
+//         })
+//     });
+// });
 
 
 /*chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {
