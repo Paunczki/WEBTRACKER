@@ -18,7 +18,7 @@ chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {
         }
     });
 });
-
+chrome.tabs.onUpdated.addListener(null)
 //working onRemoved
 chrome.tabs.onRemoved.addListener(function(){
     chrome.tabs.query({currentWindow: true, active: true}, function(tab){
