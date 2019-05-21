@@ -33,6 +33,17 @@
 //     })
 // })
 
+chrome.runtime.onMessage.addListener(
+    function(request,sender,sendResponse)
+    {
+        if(request.message == "Go_To_Clicked"){
+            chrome.tabs.create({ url: request.website},function(tab){
+                // Callback  
+            })
+        }
+    }
+)
+
 // onUpdated (in progress)
 
 chrome.tabs.onUpdated.addListener(function(tabId, {}, tab) {

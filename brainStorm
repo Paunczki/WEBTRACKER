@@ -1,0 +1,19 @@
+How to work the onUpdated
+
+First: Explanation of onUpdated
+  - onUpdated will return information of you add a listener, 
+    which its callback takes parameters
+      - integer tabId
+          - use null to specify all tabs in question
+          - a specific tabId will only check a certain state
+      - object changeInfo
+          - allows you to pick what you want to track that has been changed
+          - Lists the changes to the state of the tab that was updated
+          - Most important: string-url or string-status (loading or complete)
+              - for url we want to only worry about the 'anchor' changing
+      - Tab tab
+          - will return the state of the tab that was updated.
+          - Note: this is not like query that requires a tab array
+Remember, listeners are always listening so we do not want multiple listeners 
+within a listener.
+

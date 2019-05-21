@@ -26,7 +26,8 @@
         "history",
         "tabs",
         "activeTab",
-        "downloads" 
+        "http://*/*",
+        "https://*/*"
     ],
 
     "background" : {
