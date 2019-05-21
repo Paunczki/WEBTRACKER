@@ -36,14 +36,17 @@ chrome.tabs.onRemoved.addListener(function(){
 // onUpdated (in progress)
 chrome.tabs.onUpdated.addListener(function() {
     chrome.tabs.query({currentWindow: true, active: true}, function(tab) {
-        var tabId = tab[0].id;
-        var tabUrl = tab[0].url;
-        chrome.storage.sync.set({'a': tabId, 'b': tabUrl}, function(){
-            //alert('saved');
-        })
-        chrome.storage.sync.get(['a', 'b'], function(data){
-            alert(data.a + ' : ' + data.b + ' : 0 : ' + Date.now());
-        })
+        if(chrome.tabs.TabStatus = 'complete') {
+            var tabId = tab[0].id;
+            var tabUrl = tab[0].url;
+            chrome.storage.sync.set({'a': tabId, 'b': tabUrl}, function(){
+                //alert('saved');
+            })
+            chrome.storage.sync.get(['a', 'b'], function(data){
+                alert(data.a + ' : ' + data.b + ' : 0 : ' + Date.now());
+            })
+
+        }
     });
 });
 
