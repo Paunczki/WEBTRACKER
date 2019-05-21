@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Web Tracker</title>
-        <script src = "jquery-3.4.1.min.js">
-        </script>
-        <script src = "popup.js">
-        </script>
-        <script src="background.js">
-        </script>
+        <title>Web Tracker</title></script>
+
+        <script src = "popup.js"></script>
+
+        <script src="background.js"></script>
+
         <link rel = "stylesheet" type = "text/css" href = "popup.css">
+
     </head>
     <style>
-        h1 {color:#00bbff} /*{fontsize: 13pt} */
+         h1 {color:#00bbff} /*{fontsize: 13pt} */
         h2 {color:#ff00ea}
         @font-face {font-family: Quantify; font-weight: bold; src: url('Quantify.ttf');}
         h1 {
@@ -19,18 +19,42 @@
         }
         h2{
             font-family: Quantify
-        }
+        } 
+
+        td { white-space: nowrap; }
     </style>
     <body>
         <h1>Web</h2>
         <h2>Tracker!</h2>
         <body style = "background-color:#404040 ;"></body>
         <img src="icon48.png"/>
-        
-        <form name='testForm'>
-            <button type = "button" value = "off" id = "butt" style = "height: 25px; width: 100px" onclick = "change()">Off</button>
-        </form>
+
+        <button type = "start" vale = "Start" id = "button1" style = "height: 25px; width: 100px">Start</button>
+        <button type = "button" value = "Stop" id = "button2" style = "height: 25px; width: 100px">Stop</button>
+
+        <!-- <script>
+            var button = document.getElementById("start");
+            var title = document.getElementById("title");
+            var time = 0;
+            var myInterval = -1;
+
+            button.addEventListener("click", function(event){
+                //if stopped, start
+                if (myInterval == -1) {
+                    button.innerHTML = "stop";
+                    myInterval = setInterval(function() {
+                        time ++;
+                        title.innerHTML = time;
+                    }, 1000);
+                }
+                else {
+                    button.innerHTML = "Start";
+                    clearInterval(myInterval);
+                    myInterval = -1;
+                }
+            });
+        </script> -->
+   
     </body>
 
-
-<!-- id='alertButton' value='start' -->
+</html>
