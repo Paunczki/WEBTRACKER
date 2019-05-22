@@ -1,0 +1,12 @@
+The way it seems that we need to match URL's is based in Chrome's API
+
+https://developer.chrome.com/apps/events 
+See this link to see certain arguments we can pass within background.js to view all 
+types of matches URL can have.
+    see UrlFilter
+
+https://developer.chrome.com/extensions/samples
+See Live HTTP headers
+We can also look into creating a header.js and header.html which will require more 
+coding but it can allow for more manipulation of the data. 
+The manipulation provided here is extensive.
