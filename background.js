@@ -1,3 +1,11 @@
+chrome.extension.onConnect.addListener(function(port) {
+    console.log("Connected .....");
+        port.onMessage.addListener(function(msg) {
+         console.log("message recieved" + msg);
+         port.postMessage(" Hi Popup.js");
+    });
+})
+
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     if(changeInfo.status === 'loading') {
         var bs = tab.url;
