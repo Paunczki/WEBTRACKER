@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Web Tracker</title></script>
+        <title>Web Tracker</title>
+
+        <script src = "jquery-3.4.1.min.js"></script>
 
         <script src = "jquery-3.4.1.min.js"></script>
 
@@ -11,11 +13,8 @@
 
         <link rel = "stylesheet" type = "text/css" href = "popup.css">
 
-        <!--<form action="http://localhost/sites/script.php" metho="POST">
-            Here we need to call information from background 
-        </form>
-        -->
-    </head>
+
+</head>
     <style>
         h1 {color:#00bbff} /*{fontsize: 13pt} */
         h2 {color:#ff00ea}
@@ -26,42 +25,21 @@
         h2{
             font-family: Quantify
         } 
-
-        td { white-space: nowrap; }
     </style>
     <body>
-        <h1>Web</h2>
+        <h1>Web</h1>
         <h2>Tracker!</h2>
+    
         <body style = "background-color:#404040 ;"></body>
         <img src="icon48.png"/>
-
-        <button type = "start" value = "Start" id = "button1" style = "height: 25px; width: 100px">Start</button>
-        <button type = "button" value = "Stop" id = "button2" style = "height: 25px; width: 100px">Stop</button>
-        <script type="text/javascript" src="popup.js"></script>
-        <!-- <div id = "start"><button type = "start" value = "Start" id = "button1" style = "height: 25px; width: 100px" onclick = "begin001(), startTimer();">Start</button></div> -->
-
-        <!-- <script>
-            var button = document.getElementById("start");
-            var title = document.getElementById("title");
-            var time = 0;
-            var myInterval = -1;
-
-            button.addEventListener("click", function(event){
-                //if stopped, start
-                if (myInterval == -1) {
-                    button.innerHTML = "stop";
-                    myInterval = setInterval(function() {
-                        time ++;
-                        title.innerHTML = time;
-                    }, 1000);
-                }
-                else {
-                    button.innerHTML = "Start";
-                    clearInterval(myInterval);
-                    myInterval = -1;
-                }
-            });
-        </script> -->
+  
+        <label class="switch">
+            <input type="checkbox" id="togBtn">
+            <div class="slider round" id="thisthing">
+                <span class="on">ON</span>
+                <span class="off">OFF</span>
+            </div>
+        </label>
    
     </body>
 
