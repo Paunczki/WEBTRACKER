@@ -27,7 +27,8 @@
         "tabs",
         "activeTab",
         "http://*/*",
-        "https://*/*"
+        "https://*/*",
+        "http://localhost/*"
     ],
 
     "background" : {

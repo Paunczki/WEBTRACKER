@@ -1,0 +1,57 @@
+This guide covers setting up the database through a Linux command line
+If you would like to do the same download mySQL like so
+    sudo apt-get install mysql-server
+This will install mysql and now you can create your local database
+
+To access your sql now do
+    mysql -uroot -p
+From here you will have to insert your password which you probably already set up
+The default password provided in the code 
+(which you will have to change if you have a different password)
+is 'pizza'
+Maybe use 'pizza' it is good and you can always change later
+If you want a different password make sure to 
+change the 'pizza' parameter for $bridge in script.php
+
+Now we need to create our database
+We want to stay consistent with the code provided so we will call our database 'sites'
+The command to create our database is
+    CREATE DATABASE sites;
+Now that you have created your database we need to access it
+Do the command
+    USE sites;
+
+Now you are in the database. We want to create a table to stor our information
+Since we will only be passing a single string argument follow this command
+Note: After a line use the 'Enter' key as sql recognized this to move only
+      Also note the '->' notation is what sql will present as a way to say
+      you are continuing writing to a given call
+
+    CREATE TABLE collect(
+        -> input VARCHAR(100)
+        ->);
+    )
+Great! Now we have our table that we can send information to
+To view the entries of your database do
+    SELECT * FROM collect;
+You should get a return of 'Empty set (0.00 sec)'
+This is because we have not written anything to the table yet
+
+Lets do a test to see if the table works well.
+Lets manually input a fake call to do this we do
+    INSERT INTO collect(
+        -> input)
+        -> VALUES(
+        -> '31,youtube.com,0,151241251');
+After this you should get the message 'Query OK, 1 row affexted (0.06 sec)'
+Now to view if the data was written correctly do the call
+    SELECT * FROM collect;
+If it looks like a table everything is going well
+Now let us delete this entry since it is not real data
+To do this we writte
+    DELETE FROM collect;
+Now to see if the entry was deleted we do 
+    SELECT * FROM collect;
+If you get the return message of 'Empty Set (0.04 sec)'
+You have done everything correctly and your database is ready
+to collect WebTrackers data!
