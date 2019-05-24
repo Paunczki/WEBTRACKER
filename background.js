@@ -12,8 +12,13 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             var array1 = previousUrl.split('/');
             preU = array1[2];
         }
-        var array2 = (changeInfo.url).split('/');
-        newU = array2[2];
+        if(newU === undefined){
+            newU = 'newtab';
+        }
+        if(!(newU === undefined)){
+            var array2 = (changeInfo.url).split('/');
+            newU = array2[2];
+        }
         if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
             // alert(tabId + "  -  " + preU + "  -  0  -  " + Date.now());
             // need method to send to script.php
