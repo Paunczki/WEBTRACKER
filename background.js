@@ -1,5 +1,11 @@
 var tabIdToPreviousUrl = {};
 
+function writeToDB(data){
+    var req = new XMLHttpRequest();
+    req.open('POST', 'script.php', true);
+    req.send(data);
+}
+
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     if(changeInfo.status === 'loading'){
         var previousUrl = "";
@@ -20,12 +26,14 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             newU = array2[2];
         }
         if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
-            // alert(tabId + "  -  " + preU + "  -  0  -  " + Date.now());
-            // need method to send to script.php
+            var sendEnd = tabId + "," + preU + ",0," + Date.now();
+            alert(sendEnd);
+            writeToDB(sendEnd);
         }
         if((preU !== newU)&&(!(newU==='newtab'))){
-            // alert(tabId + "  -  " + newU + "  -  1  -  " + Date.now());
-            // need method to send to script.php
+            var sendStart = tabId + "," + newU + ",1," + Date.now();
+            alert(sendStart);
+            writeToDB(sendStart);
         }
         tabIdToPreviousUrl[tabId] = changeInfo.url;
     }
@@ -43,7 +51,8 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
         preU = array1[2];
     }
     if(!(preU === 'newtab')&&(!(preU === undefined))){
-        // alert(tabId + "  -  " + preU + "  -  0  -  " + Date.now());
-        // need method to send to script.php
+        var sendClosed = tabId + "," + preU + ",0," + Date.now()
+        alert(sendClosed);
+        writeToDB(sendClosed);
     }
 });
