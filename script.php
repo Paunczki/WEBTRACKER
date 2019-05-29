@@ -14,6 +14,9 @@
     
     mysqli_close($bridge);
 //}
+
+
+
 /*
     if(isSet($_POST['url'])){
         $con = mysqli_connect('localhost', 'root', 'my_pw', 'my_db');
@@ -25,4 +28,5 @@
         mysqli_close($con);
     }
 */
+
 ?>

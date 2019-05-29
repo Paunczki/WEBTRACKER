@@ -20,8 +20,3 @@ $(function(){
         });
     }); 
 });
-
-/*document.getElementById('saveFile').onclick = function() {
-    var value = saveFile.value;
-}
-*/
