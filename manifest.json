@@ -15,7 +15,7 @@
     "content_scripts":[{
         "matches": ["*://a/*"],
         "all_frames" : true,
-        "js": ["contentScript.js"]
+        "js": ["jquery-3.4.1.min.js", "contentScript.js"]
         }
     ],
     "options_page" : "options.html",
@@ -23,15 +23,14 @@
     "permissions" : [
         "storage",
         "background",
-        "history",
         "tabs",
-        "activeTab",
         "http://*/*",
         "https://*/*",
         "http://localhost/*"
     ],
 
     "background" : {
-        "scripts" : ["background.js"]
+        "scripts" : ["jquery-3.4.1.min.js", "background.js"]
+       
     }
 }

@@ -35,8 +35,7 @@ body {
       left: 200px;
   }
    
-
-   .switch {
+  .switch {
     position: relative;
     display: inline-block;
     width: 90px;
@@ -84,7 +83,6 @@ body {
     transform: translateX(55px);
   }
   
-  /*------ ADDED CSS ---------*/
   .on
   {
     display: none;
@@ -106,8 +104,6 @@ body {
   
   input:checked + .slider .off
   {display: none;}
-  
-  /*--------- END --------*/
   
   /* Rounded sliders */
   .slider.round {
