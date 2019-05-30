@@ -1,0 +1,18 @@
+To install this extension follow this guide
+
+Download all the files INTO A FOLDER from 
+    https://github.com/Iqra2124/WEBTRACKER 
+This will create a local file that you can use git commands with and access everything
+
+Once it is downloaded, open up chrome and type in the address bar
+    chrome://extensions
+Hit enter and you should be on the chrome extensions page
+You should see a slider at the top right labeled "Developer mode"
+Slide it on (should highlight or change to a not gray color)
+
+Now you should see new options such as 'Load unpacked', 'Pack extension', and 'Update'
+Click 'Load unpacked'
+Now navigate to the folder you downloaded the files to and select that folder
+Now make sure the 'WebTracker!' looks correct,is on, and the logo appears in the extension bar at the top left of the browser
+
+You are all now set to record with 'WebTracker!'

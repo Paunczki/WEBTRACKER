@@ -1,0 +1,13 @@
+What this project is good for
+    - Quick intro to full stack development at the level of a Chrome Extension
+    - Great understanding of the functionality of JavaScript and its extensions (jQuery, AJAX, etc.)
+    - Provides understanding of the anatomy of the web (server side, client side, etc.)
+
+What to still work on
+    - Write to a database
+        - Specifically have background.js talk to script.php correctly so that 
+          in phpmyadmin's database that is created we see our string input appear
+    - Options page to fit in timing so results are consistent 
+      (instead of manually turning on/off)
+        - Use options.js and options.html to accomplish this
+        - save value to chrome.storage.local to be consistent

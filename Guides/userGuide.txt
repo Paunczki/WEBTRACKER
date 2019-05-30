@@ -1,0 +1,18 @@
+To work extension
+    Simply left click on the extension to open the user interface
+    click the slider if you want to begin recording website traffic
+        set the slider to "ON"
+    Navigate away from the interface and begin surfing the web
+    Once you want to conclude recording, click the interface again
+    click the slider to "OFF" and now you are all done
+
+Soon to come
+    Right click the extension icon
+    in the menu that appears click on options
+    In there specify how long you want to record data for once you
+    have turned the extension on
+
+Database
+    Since the database is not currently working do not worry about this that much
+    To learn how to create a local database, while we set up one you can access,
+    followup with the databaseGuide and wait for the php code to be fixed.

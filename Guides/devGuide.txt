@@ -1,0 +1,35 @@
+Provided is a bullet point list of every file and what it does or should do
+    - NOTE: this is high level explanations
+
+background.js
+    - Gets the information of a change in the format
+        tabId,websiteUrl,0,timestamp    // 0 for off and 1 for on in 3 entry
+    - Records when the tab has changed URLs or a new tab is opened/closed to an actual site
+icon16.png / icon48.png / icon128.png
+    - These are our logo for the chrome extension
+jquery-3.4.1.min.js
+    - This is the code needed to run jQuery. 
+      jQuery is used to provide more interactivity within JavaScript without refreshing the page constantly
+manifest.json
+    - This is the framework Chrome works with to know what files will be used for what purpose
+      JSON is JavaScript object oriented programming and assigns the values chrome uses to run your extension
+options.html
+    - Provides the layout for buttons and headers that will executed in options.js
+      To access right click chrome extension logo and press options from menu that appears
+      (WORK IN PROGRESS)
+options.js
+    - Used to get the values set from the options page. Ideally will be used to time how long the background works for
+      To access right click chrome extension logo and press options from menu that appears
+      (WORK IN PROGRESS)
+popup.css
+    - Gives the slider in the popup
+    - Styles the GUI of the extension (the design you see when you left click the extension's icon)
+popup.html
+    - Styles the GUI of the extension (the design you see when you left click the extension's icon) 
+popup.js
+    - Get slider information and stores it to Chrome storage that will later be accessed
+README.md
+    - Project title and abstract
+script.php
+    - Supposed to take in values passed from background.js and uploads to a database since PHP works with servers
+      (WORK IN PROGRESS)

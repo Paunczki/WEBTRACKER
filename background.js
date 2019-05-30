@@ -36,12 +36,12 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             newU = array2[2];
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 var sendEnd = tabId + "," + preU + ",0," + Date.now();
-                alert(sendEnd);
+                // alert(sendEnd);
                 writeToDB(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))){
                 var sendStart = tabId + "," + newU + ",1," + Date.now();
-                alert(sendStart);
+                // alert(sendStart);
                 writeToDB(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
@@ -63,7 +63,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
         }
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             var sendClosed = tabId + "," + preU + ",0," + Date.now();
-            alert(sendClosed);
+            // alert(sendClosed);
             writeToDB(sendClosed);
         }
     }
