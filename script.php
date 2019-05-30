@@ -1,28 +1,5 @@
 <pre><?php
-    /*
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    
-    $dbhost = 'localhost';
-    $dbuser = 'root';
-    $dbpass = '';
-    $conn = mysql_connect($dbhost, $dbsuer, $dbpass);
-    if($conn){
-        die('Could not conenct: ' .mysql_error());
-    }
-    $author = $_POST['name'];
-    $mousepositions = $_POST['positon'];
-    var_dump($author);
-    $sql = "INSERT INTO Images (Author, Image) VALUES ('$author','$mousepositions')";
-    mysql_select_db('db_to_use');
-    $retval = mysql_query($sql, $conn);
-    if(!$retval){
-        die('Could not enter data: ' .mysql_error());
-    }
-    echo "Entered data successfully\n";
-    mysql_close($conn);
-    */
-    $servername = "147.126.10.152";
+    $servername = "localhost";
     $database = "sites";
     $username = "root";
     $password = "";
