@@ -1,32 +1,44 @@
-<?php
-//if(isSet($_POST['data'])){
-    $data = $_POST['data'];
-    $bridge = mysqli_connect('localhost','root','pizza','sites');
-    $stmt = mysqli_prepare($bridge, 'INSERT INTO collect (input) VALUES ($data)');
-    mysqli_stmt_binf_param('$stmt', 's', $_POST['data']);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    mysqli_close($bridge);
+<pre><?php
+    /*
+    $name = $_POST['name'];
+    $email = $_POST['email'];
     
-    
-    //$query = "INSERT INTO collect (input) VALUES ('$data')";
-    
-    
-    mysqli_close($bridge);
-//}
-
-
-
-/*
-    if(isSet($_POST['url'])){
-        $con = mysqli_connect('localhost', 'root', 'my_pw', 'my_db');
-        // ...
-        $stmt = mysqli_prepare($con, 'INSERT INTO urlHistory (URLs) VALUES (?)');
-        mysqli_stmt_bind_param($stmt, 's', $_POST['url']);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-        mysqli_close($con);
+    $dbhost = 'localhost';
+    $dbuser = 'root';
+    $dbpass = '';
+    $conn = mysql_connect($dbhost, $dbsuer, $dbpass);
+    if($conn){
+        die('Could not conenct: ' .mysql_error());
     }
-*/
-
+    $author = $_POST['name'];
+    $mousepositions = $_POST['positon'];
+    var_dump($author);
+    $sql = "INSERT INTO Images (Author, Image) VALUES ('$author','$mousepositions')";
+    mysql_select_db('db_to_use');
+    $retval = mysql_query($sql, $conn);
+    if(!$retval){
+        die('Could not enter data: ' .mysql_error());
+    }
+    echo "Entered data successfully\n";
+    mysql_close($conn);
+    */
+    $servername = "147.126.10.152";
+    $database = "sites";
+    $username = "root";
+    $password = "";
+    $conn = mysqli_connect($servername, $username, $password, $database);
+    if (!$conn) {
+          die("Connection failed: " . mysqli_connect_error());
+    }
+     
+    echo "Connected successfully";
+     
+    $sql = "INSERT INTO collect (input) VALUES ('hello')";
+    if (mysqli_query($conn, $sql)) {
+          echo "New record created successfully";
+    } else {
+          echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    mysqli_close($conn);
 ?>
+</pre>
