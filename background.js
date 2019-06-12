@@ -19,9 +19,16 @@ chrome.storage.onChanged.addListener(function() {
     });
 });
 
+var statusW = '';
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     if(switchStatus === true){
         if(changeInfo.status === 'loading'){
+            statusW = '1';
+        }
+        if(changeInfo.status === 'complete'){
+            statusW = '2';
+        }
+        //if(changeInfo.status === 'loading'){
             var previousUrl = "";
             previousUrl = tabIdToPreviousUrl[tabId];
             var preU = ''; var newU = '';
@@ -36,16 +43,16 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             newU = array2[2];
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 var sendEnd = tabId + "," + preU + ",0," + Date.now();
-                // alert(sendEnd);
+                alert(sendEnd);
                 writeToDB(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))){
-                var sendStart = tabId + "," + newU + ",1," + Date.now();
-                // alert(sendStart);
+                var sendStart = tabId + "," + newU + "," + statusW + "," + Date.now();
+                alert(sendStart);
                 writeToDB(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
-        }
+        //}
     }
 });
 
