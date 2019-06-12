@@ -1,15 +1,15 @@
 var tabIdToPreviousUrl = {};
 
-function writeToDB(input){
-    $.ajax({
-        type: 'post',
-        url: 'https://localhost/db1/script.php',
-        data: {input: input},
-        success: function(){
-            alert("it workin'");
-        }
-    })
-}
+// function writeToDB(input){
+//     $.ajax({
+//         type: 'post',
+//         url: 'https://localhost/db1/script.php',
+//         data: {input: input},
+//         success: function(){
+//             alert("it workin'");
+//         }
+//     })
+// }
 
 var switchStatus = false;
 
@@ -44,12 +44,12 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 var sendEnd = tabId + "," + preU + ",0," + Date.now();
                 alert(sendEnd);
-                writeToDB(sendEnd);
+                //writeToDB(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))){
                 var sendStart = tabId + "," + newU + "," + statusW + "," + Date.now();
                 alert(sendStart);
-                writeToDB(sendStart);
+                //writeToDB(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
         //}
@@ -70,8 +70,8 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
         }
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             var sendClosed = tabId + "," + preU + ",0," + Date.now();
-            // alert(sendClosed);
-            writeToDB(sendClosed);
+            alert(sendClosed);
+            //writeToDB(sendClosed);
         }
     }
 });
