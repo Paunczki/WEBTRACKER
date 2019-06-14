@@ -10,6 +10,4 @@ What needs to be done / Eric's suggestions
 3. Work on options.html and options.js
     - want to take in time increments
     - Make it look appealing
-4. Fix error that first few turn on/off returns value of undefined
-    - want to to know the value at start no matter what
-5. 
+4. 

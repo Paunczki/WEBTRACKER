@@ -12,6 +12,9 @@ var tabIdToPreviousUrl = {};
 // }
 
 var switchStatus = false;
+chrome.storage.local.get('sS', function(status){
+    switchStatus = status.sS;
+});
 
 chrome.storage.onChanged.addListener(function() {
     chrome.storage.local.get('sS', function(status){
