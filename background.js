@@ -22,45 +22,38 @@ chrome.storage.onChanged.addListener(function() {
     });
 });
 
-var statusW = '';
+var newWebsite;
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     if(switchStatus === true){
-        // alert(changeInfo.status);
-        // if(changeInfo.status === 'loading'){
-            var previousUrl = "";
-            previousUrl = tabIdToPreviousUrl[tabId];
-            var preU = ''; var newU = '';
-            if(previousUrl === undefined){
-                preU = 'undefined';
-            }
-            if(!(previousUrl === undefined)){
-                var array1 = previousUrl.split('/');
-                preU = array1[2];
-            }
-            var array2 = (changeInfo.url).split('/');
-            /*
-                ISSUE!!!!
-                Right here changeInfo.status forgets the status 'complete'
-                Need to research this so that we can have our on complete work also
-            */
-            newU = array2[2];
-            if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
-                var sendEnd = tabId + "," + preU + ",0," + Date.now();
-                alert(sendEnd);
-                //writeToDB(sendEnd);
-            }
-            if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
-                var sendStart = tabId + "," + newU + ",1," + Date.now();
-                alert(sendStart);
-                //writeToDB(sendStart);
-            }
-            if((!(newU==='newtab'))&&(changeInfo.status === 'complete')){
-                var sendDone = tabId + "," + newU + ",2," + Date.now();
-                alert(sendDone);
-                //writeToDB(sendStart);
-            }
-            tabIdToPreviousUrl[tabId] = changeInfo.url;
-        // }
+        if(changeInfo.status === 'complete'){
+            var sendDone = tabId + "," + newWebsite + ",2," + Date.now();
+            alert(sendDone);
+            //writeToDB(sendStart);
+        }
+        var previousUrl = "";
+        previousUrl = tabIdToPreviousUrl[tabId];
+        var preU = ''; var newU = '';
+        if(previousUrl === undefined){
+            preU = 'undefined';
+        }
+        if(!(previousUrl === undefined)){
+            var array1 = previousUrl.split('/');
+            preU = array1[2];
+        }
+        var array2 = (changeInfo.url).split('/');
+        newU = array2[2];
+        newWebsite = newU;
+        if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
+            var sendEnd = tabId + "," + preU + ",0," + Date.now();
+            alert(sendEnd);
+            //writeToDB(sendEnd);
+        }
+        if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
+            var sendStart = tabId + "," + newU + ",1," + Date.now();
+            alert(sendStart);
+            //writeToDB(sendStart);
+        }
+        tabIdToPreviousUrl[tabId] = changeInfo.url;
     }
 });
 

@@ -3,11 +3,7 @@ What needs to be done / Eric's suggestions
 1. Setup a java server
     - want it to accept strings 
     - writes directly to a text file
-2. Fix loading, completed
-    - 0 - off
-    - 1 - loading
-    - 2 - completed
-3. Work on options.html and options.js
+2. Work on options.html and options.js
     - want to take in time increments
     - Make it look appealing
-4. 
+3. 
