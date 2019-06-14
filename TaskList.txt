@@ -5,5 +5,4 @@ What needs to be done / Eric's suggestions
     - writes directly to a text file
 2. Work on options.html and options.js
     - want to take in time increments
-    - Make it look appealing
 3. 
