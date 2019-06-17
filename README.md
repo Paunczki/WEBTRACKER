@@ -1,4 +1,5 @@
 # WEBTRACKER: Building a Chrome Extension to Track Websites Visited
+Project was presented at a school conference for research (FYRE).
 See attached poster for more detail (Webtracker_Poster_Final.pdf)
 
 This extension allows you to record the timestamps of when you changed websites through google chrome. 
