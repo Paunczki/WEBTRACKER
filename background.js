@@ -3,7 +3,7 @@ var nowTime = Date.now();
 var timeIncremement = 20000;
 
 function sendInfo(input){
-    var webSocket = new WebSocket("wss://locahlhost:8123");
+    var webSocket = new WebSocket("wss://localhost:8123");
     webSocket.onopen = function() {
         webSocket.send(input);
     }
