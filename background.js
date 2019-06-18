@@ -2,6 +2,14 @@ var tabIdToPreviousUrl = {};
 var nowTime = Date.now();
 var timeIncremement = 20000;
 
+function sendInfo(input){
+    var webSocket = new WebSocket("wss://locahlhost:8123");
+    webSocket.onopen = function() {
+        webSocket.send(input);
+    }
+    webSocket.close();
+}
+
 // function writeToDB(input){
 //     $.ajax({
 //         type: 'post',
@@ -38,7 +46,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
         if((!(newWebsite === previousWebsite))&&(!(newWebsite === 'newtab'))&&(changeInfo.status === 'complete')){
             var sendDone = tabId + "," + newWebsite + ",2," + Date.now();
             alert(sendDone);
-            //writeToDB(sendStart);
+            sendInfo(sendStart);
         }
         if(changeInfo.status === 'loading'){
             var previousUrl = "";
@@ -58,12 +66,12 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 var sendEnd = tabId + "," + preU + ",0," + Date.now();
                 alert(sendEnd);
-                //writeToDB(sendEnd);
+                sendInfo(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
                 var sendStart = tabId + "," + newU + ",1," + Date.now();
                 alert(sendStart);
-                //writeToDB(sendStart);
+                sendInfo(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
         }
@@ -91,7 +99,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             var sendClosed = tabId + "," + preU + ",0," + Date.now();
             alert(sendClosed);
-            //writeToDB(sendClosed);
+            sendInfo(sendClosed);
         }
     }
 });
