@@ -1,7 +1,0 @@
-What needs to be done for the Java server
-
-Right now the server is communicating with the chrome extension which is good, but it is returning none UTF-8 typology.
-Need to find a way to fix it. 
-Experimented with certain methods but there seems to be an issue of understanding between chrome and server.
-
-After we get this to work we want to work on multiple users using the server.
