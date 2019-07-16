@@ -4,15 +4,27 @@ var timeIncremement = 20000;
 
 // localhost:8123
 
-
 function sendInfo(input){
-    var webSocket = new WebSocket("wss://localhost:8123");
+    // alert("hello " + input);
+    var request = new XMLHttpRequest();
+    var url = "https://cybersecurity.cs.luc.edu/JohnTest/" + input;
+    request.open("POST", url, true); 
+    request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8"); 
+    request.send("data")
+    // request.onreadystatechange = function () {
+    //   request.send(input);
+    // }
+}
+
+/*
+function sendInfo(input){
+    var webSocket = new WebSocket("wss://127.0.0.1:8123");
     webSocket.onopen = function() {
         webSocket.send(input);
     }
     webSocket.close();
 }
-
+*/
 
 /*
 function sendInfo(input){
