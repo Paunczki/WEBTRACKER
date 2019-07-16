@@ -2,7 +2,8 @@ var tabIdToPreviousUrl = {};
 var nowTime = Date.now();
 var timeIncremement = 20000;
 
-//
+// localhost:8123
+
 
 function sendInfo(input){
     var webSocket = new WebSocket("wss://localhost:8123");
@@ -12,13 +13,14 @@ function sendInfo(input){
     webSocket.close();
 }
 
+
 /*
 function sendInfo(input){
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "localhost:8123", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
-        value: value
+        input: input
     }));
     xhr.close();
 }
@@ -26,14 +28,14 @@ function sendInfo(input){
 
 /*
 function sendInfo(input) {
-    function posAjax(url,data, success) {
-        var params = typeof data == 'string' ? data : Object.keys(data).map(
+    function posAjax("localhost:8123",input, success) {
+        var params = typeof data == 'string' ? input : Object.keys(data).map(
             function(k){
                 return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
             }
         ).join('&');
         var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-        xhr.open('POST', url);
+        xhr.open('POST', 'localhost:8123');
         xhr.onreadystatechange = function() {
             if(xhr.readyState>3 && xhr.status==200){
                 success(xhr.responseText);
