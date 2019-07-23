@@ -66,7 +66,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             chrome.storage.local.set({'sendDone':sendDone}, function(){});
             chrome.storage.local.get('sendDone', function(status){
                 alert(status.sendDone);
-                sendInfo(sendStart);
+                sendInfo(status.sendDone);
             });
         }
         if(changeInfo.status === 'loading'){
