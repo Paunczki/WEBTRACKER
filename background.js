@@ -1,6 +1,31 @@
+function getRandomToken() {
+    var randomPool = new Uint8Array(8);
+    crypto.getRandomValues(randomPool);
+    var hex = '';
+    for (var i = 0; i < randomPool.length; ++i) {
+        hex += randomPool[i].toString(16);
+    }
+    return hex;
+}
+
+var userid;
+chrome.storage.sync.get('userid', function(items) {
+    userid = items.userid;
+    if (userid) {
+        useToken(userid);
+    } 
+    else {
+        userid = getRandomToken();
+        chrome.storage.sync.set({userid: userid}, function() {});
+    }
+    function useToken(userid) {
+        // alert(userid);
+    }
+});
+
 var tabIdToPreviousUrl = {};
 var nowTime = Date.now();
-var timeIncremement = 5000;
+var timeIncremement = 20000;
 
 function sendInfo(input){
     // alert("hello " + input);
@@ -37,7 +62,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     timers = nowTime + timeIncremement;
     if((switchStatus === true)&&(Date.now() < timers)){
         if((!(newWebsite === previousWebsite))&&(!(newWebsite === 'newtab'))&&(changeInfo.status === 'complete')){
-            var sendDone = tabId + "," + newWebsite + ",2," + Date.now();
+            var sendDone = userid + "," + tabId + "," + newWebsite + ",2," + Date.now();
             chrome.storage.local.set({'sendDone':sendDone}, function(){});
             chrome.storage.local.get('sendDone', function(status){
                 alert(status.sendDone);
@@ -60,12 +85,12 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             newU = array2[2];
             newWebsite = newU;
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
-                var sendEnd = tabId + "," + preU + ",0," + Date.now();
+                var sendEnd = userid + "," + tabId + "," + preU + ",0," + Date.now();
                 alert(sendEnd);
                 sendInfo(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
-                var sendStart = tabId + "," + newU + ",1," + Date.now();
+                var sendStart = userid + "," + tabId + "," + newU + ",1," + Date.now();
                 alert(sendStart);
                 sendInfo(sendStart);
             }
@@ -94,7 +119,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
             preU = array1[2];
         }
         if(!(preU === 'newtab')&&(!(preU === undefined))){
-            var sendClosed = tabId + "," + preU + ",0," + Date.now();
+            var sendClosed = userid + "," + tabId + "," + preU + ",0," + Date.now();
             alert(sendClosed);
             sendInfo(sendClosed);
         }
