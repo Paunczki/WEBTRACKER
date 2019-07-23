@@ -2,6 +2,9 @@
 Project was presented at a school conference for research (FYRE).
 See attached poster for more detail (Webtracker_Poster_Final.pdf)
 
+There are going to be two versions for the app, one for chrome and one for firefox
+Please go to the respective folders for each
+
 This extension allows you to record the timestamps of when you changed websites through google chrome. 
 For exaple, when you go from google to youtube it will tell you at what time google was left, what time youtube began loading, and finally at what time youtube completed loading.
 This is done using chrome API and JavaScript knowledge to achieve this output.
