@@ -17,11 +17,9 @@ public class WebSocket {
 			System.out.println("Server has started on 127.0.0.1:8123.\r\nWaiting for a connection...");
 			Socket client = server.accept();
             System.out.println("A client connected.");
-            
             InputStream in = client.getInputStream();
 			OutputStream out = client.getOutputStream();
             Scanner s = new Scanner(in, "UTF-8");
-            
             try {
 				String data = s.useDelimiter("\\r\\n\\r\\n").next();
                 Matcher get = Pattern.compile("^GET").matcher(data);
