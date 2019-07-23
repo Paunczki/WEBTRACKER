@@ -9,14 +9,14 @@ function getRandomToken() {
 }
 
 var userid;
-chrome.storage.sync.get('userid', function(items) {
+browser.storage.local.get('userid', function(items) {
     userid = items.userid;
     if (userid) {
         useToken(userid);
     } 
     else {
         userid = getRandomToken();
-        chrome.storage.sync.set({userid: userid}, function() {});
+        browser.storage.local.set({'userid': userid}, function() {});
     }
     function useToken(userid) {
         // alert(userid);
@@ -40,16 +40,16 @@ function sendInfo(input){
 }
 
 var switchStatus = false;
-chrome.storage.local.get('sS', function(status){
+browser.storage.local.get('sS', function(status){
     switchStatus = status.sS;
 });
 
-chrome.storage.local.get('time', function(stamp){
+browser.storage.local.get('time', function(stamp){
     timeIncrement = stamp.time;
 })
 
-chrome.storage.onChanged.addListener(function() {
-    chrome.storage.local.get('sS', function(status){
+browser.storage.onChanged.addListener(function() {
+    browser.storage.local.get('sS', function(status){
         switchStatus = status.sS;
         if(switchStatus === true){
             nowTime = Date.now();
@@ -58,14 +58,14 @@ chrome.storage.onChanged.addListener(function() {
 });
 
 var newWebsite; var timers; var previousWebsite;
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     timers = nowTime + timeIncremement;
     if((switchStatus === true)&&(Date.now() < timers)){
         if((!(newWebsite === previousWebsite))&&(!(newWebsite === 'newtab'))&&(changeInfo.status === 'complete')){
             var sendDone = userid + "," + tabId + "," + newWebsite + ",2," + Date.now();
-            chrome.storage.local.set({'sendDone':sendDone}, function(){});
-            chrome.storage.local.get('sendDone', function(status){
-                alert(status.sendDone);
+            browser.storage.local.set({'sendDone':sendDone}, function(){});
+            browser.storage.local.get('sendDone', function(status){
+                console.log(status.sendDone);
                 sendInfo(status.sendDone);
             });
         }
@@ -86,26 +86,26 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             newWebsite = newU;
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 var sendEnd = userid + "," + tabId + "," + preU + ",0," + Date.now();
-                alert(sendEnd);
+                console.log(sendEnd);
                 sendInfo(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
                 var sendStart = userid + "," + tabId + "," + newU + ",1," + Date.now();
-                alert(sendStart);
+                console.log(sendStart);
                 sendInfo(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
         }
     }
     if((switchStatus === true)&&(Date.now() > timers)){
-        chrome.storage.local.set({'sS': false}, function(){
+        browser.storage.local.set({'sS': false}, function(){
             switchStatus = false;
         });
     }
 });
 
 var timers2;
-chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
+browser.tabs.onRemoved.addListener(function(tabId, removeInfo){
     timers2 = nowTime + timeIncremement;
     if((switchStatus === true)&&(Date.now() < timers2)){
         var previousUrl = "";
@@ -120,12 +120,12 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
         }
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             var sendClosed = userid + "," + tabId + "," + preU + ",0," + Date.now();
-            alert(sendClosed);
+            console.log(sendClosed);
             sendInfo(sendClosed);
         }
     }
     if((switchStatus === true)&&(Date.now() > timers2)){
-        chrome.storage.local.set({'sS': false}, function(){
+        browser.storage.local.set({'sS': false}, function(){
             switchStatus = false;
         });
     }

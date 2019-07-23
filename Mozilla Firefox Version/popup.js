@@ -1,17 +1,17 @@
 $(function() {
     $("#togBtn").on('change', function(e) {
         if (e.target.checked){
-            chrome.storage.local.set({'sS': true}, function(){
+            browser.storage.local.set({'sS': true}, function(){
                 //alert('saved: True');
             });
         } else {
-            chrome.storage.local.set({'sS': false}, function(){
+            browser.storage.local.set({'sS': false}, function(){
                 //alert('saved: False');
             });
         }   
     });
 
-    chrome.storage.local.get('sS', function(status){
+    browser.storage.local.get('sS', function(status){
         var switchStatus = status.sS;
 
         if(switchStatus) {

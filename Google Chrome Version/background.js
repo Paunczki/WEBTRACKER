@@ -9,14 +9,14 @@ function getRandomToken() {
 }
 
 var userid;
-chrome.storage.sync.get('userid', function(items) {
+chrome.storage.local.get('userid', function(items) {
     userid = items.userid;
     if (userid) {
         useToken(userid);
     } 
     else {
         userid = getRandomToken();
-        chrome.storage.sync.set({userid: userid}, function() {});
+        chrome.storage.local.set({userid: userid}, function() {});
     }
     function useToken(userid) {
         // alert(userid);
