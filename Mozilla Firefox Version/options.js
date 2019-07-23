@@ -2,12 +2,12 @@ $(function(){
     $('#saveTime').click(function(){
         var time = Number($('#timer').val());
         if(Number.isNaN(time)){
-            alert('Please use actual numbers');
+            console.log('Please use actual numbers');
         }
         else{
             browser.storage.sync.set({'time' : time}, function(){
-                alert('Value saved as --> ' + time + ' milliseconds');
-                alert('To begin recording open the popup and move the switch to "ON"');
+                console.log('Value saved as --> ' + time + ' milliseconds');
+                console.log('To begin recording open the popup and move the switch to "ON"');
                 close();
             });
         }

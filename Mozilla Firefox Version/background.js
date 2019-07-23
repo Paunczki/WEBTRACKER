@@ -65,7 +65,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             var sendDone = userid + "," + tabId + "," + newWebsite + ",2," + Date.now();
             browser.storage.local.set({'sendDone':sendDone}, function(){});
             browser.storage.local.get('sendDone', function(status){
-                console.log(status.sendDone);
+                // console.log(status.sendDone);
                 sendInfo(status.sendDone);
             });
         }
@@ -86,12 +86,12 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             newWebsite = newU;
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 var sendEnd = userid + "," + tabId + "," + preU + ",0," + Date.now();
-                console.log(sendEnd);
+                // console.log(sendEnd);
                 sendInfo(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
                 var sendStart = userid + "," + tabId + "," + newU + ",1," + Date.now();
-                console.log(sendStart);
+                // console.log(sendStart);
                 sendInfo(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
@@ -120,7 +120,7 @@ browser.tabs.onRemoved.addListener(function(tabId, removeInfo){
         }
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             var sendClosed = userid + "," + tabId + "," + preU + ",0," + Date.now();
-            console.log(sendClosed);
+            // console.log(sendClosed);
             sendInfo(sendClosed);
         }
     }
