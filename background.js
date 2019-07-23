@@ -41,7 +41,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             chrome.storage.local.set({'sendDone':sendDone}, function(){});
             chrome.storage.local.get('sendDone', function(status){
                 alert(status.sendDone);
-                // sendInfo(sendStart);
+                sendInfo(sendStart);
             });
         }
         if(changeInfo.status === 'loading'){
@@ -62,12 +62,12 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 var sendEnd = tabId + "," + preU + ",0," + Date.now();
                 alert(sendEnd);
-                // sendInfo(sendEnd);
+                sendInfo(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
                 var sendStart = tabId + "," + newU + ",1," + Date.now();
                 alert(sendStart);
-                // sendInfo(sendStart);
+                sendInfo(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
         }
@@ -96,7 +96,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             var sendClosed = tabId + "," + preU + ",0," + Date.now();
             alert(sendClosed);
-            // sendInfo(sendClosed);
+            sendInfo(sendClosed);
         }
     }
     if((switchStatus === true)&&(Date.now() > timers2)){
