@@ -10,6 +10,7 @@ Also outputs these timestamps with information to a server for later analysis.
 There are two versions for the extension/addon, one for chrome and one for firefox
 Please go to the respective folders for each
 
-Google Chrome Download Link: 
+## Download Links
+For Google Chrome: 
 
-Mozilla Firefox Download Link: 
+For Mozilla Firefox: 
