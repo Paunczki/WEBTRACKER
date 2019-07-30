@@ -63,7 +63,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     if((switchStatus === true)&&(Date.now() < timers)){
         if((!(newWebsite === previousWebsite))&&(!(newWebsite === 'newtab'))&&(changeInfo.status === 'complete')){
             // var sendDone = userid + "," + tabId + "," + newWebsite + ",2," + Date.now();
-            var sendDone = Date.now() + "," + userid + "," + tabId + "," + newWebsite + ",2";
+            var sendDone = Date.now() + ":" + userid + ":" + tabId + ":" + newWebsite + ":2";
             chrome.storage.local.set({'sendDone':sendDone}, function(){});
             chrome.storage.local.get('sendDone', function(status){
                 // alert(status.sendDone);
@@ -87,13 +87,13 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             newWebsite = newU;
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 // var sendEnd = userid + "," + tabId + "," + preU + ",0," + Date.now();
-                var sendEnd = Date.now() + "," + userid + "," + tabId + "," + preU + ",0";
+                var sendEnd = Date.now() + ":" + userid + ":" + tabId + ":" + preU + ":0";
                 // alert(sendEnd);
                 sendInfo(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
                 // var sendStart = userid + "," + tabId + "," + newU + ",1," + Date.now();
-                var sendStart = Date.now() + "," + userid + "," + tabId + "," + newU + ",1";
+                var sendStart = Date.now() + ":" + userid + ":" + tabId + ":" + newU + ":1";
                 // alert(sendStart);
                 sendInfo(sendStart);
             }
@@ -123,7 +123,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
         }
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             // var sendClosed = userid + "," + tabId + "," + preU + ",0," + Date.now();
-            var sendClosed = Date.now() + "," + userid + "," + tabId + "," + preU + ",0";
+            var sendClosed = Date.now() + ":" + userid + ":" + tabId + ":" + preU + ":0";
             // alert(sendClosed);
             sendInfo(sendClosed);
         }
