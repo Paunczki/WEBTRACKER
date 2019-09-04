@@ -25,7 +25,7 @@ browser.storage.local.get('userid', function(items) {
 
 var tabIdToPreviousUrl = {};
 var nowTime = Date.now();
-var timeIncremement = 20000;
+var timeIncremement = 10000;
 
 function sendInfo(input){
     // alert("hello " + input);
@@ -33,7 +33,7 @@ function sendInfo(input){
     var url = "https://cybersecurity.cs.luc.edu/JohnTest/" + input;
     request.open("POST", url, true); 
     request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8"); 
-    request.send("data")
+    request.send("data");
     // request.onreadystatechange = function () {
     //   request.send(input);
     // }
@@ -66,7 +66,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             var sendDone = Date.now() + ":" + userid + ":" + tabId + ":" + newWebsite + ":2";
             browser.storage.local.set({'sendDone':sendDone}, function(){});
             browser.storage.local.get('sendDone', function(status){
-                // console.log(status.sendDone);
+                console.log(status.sendDone);
                 sendInfo(status.sendDone);
             });
         }
@@ -88,19 +88,20 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 // var sendEnd = userid + "," + tabId + "," + preU + ",0," + Date.now();
                 var sendEnd = Date.now() + ":" + userid + ":" + tabId + ":" + preU + ":0";
-                // console.log(sendEnd);
+                console.log(sendEnd);
                 sendInfo(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
                 // var sendStart = userid + "," + tabId + "," + newU + ",1," + Date.now();
                 var sendStart = Date.now() + ":" + userid + ":" + tabId + ":" + newU + ":1";
-                // console.log(sendStart);
+                console.log(sendStart);
                 sendInfo(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
         }
     }
     if((switchStatus === true)&&(Date.now() > timers)){
+        console.log(1);
         browser.storage.local.set({'sS': false}, function(){
             switchStatus = false;
         });
@@ -124,11 +125,12 @@ browser.tabs.onRemoved.addListener(function(tabId, removeInfo){
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             // var sendClosed = userid + "," + tabId + "," + preU + ",0," + Date.now();
             var sendClosed = Date.now() + ":" + userid + ":" + tabId + ":" + preU + ":0";
-            // console.log(sendClosed);
+            console.log(sendClosed);
             sendInfo(sendClosed);
         }
     }
     if((switchStatus === true)&&(Date.now() > timers2)){
+        console.log(2);
         browser.storage.local.set({'sS': false}, function(){
             switchStatus = false;
         });
