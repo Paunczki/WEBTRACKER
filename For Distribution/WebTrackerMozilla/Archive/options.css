@@ -1,0 +1,60 @@
+h1 {
+    position: relative;
+    font-size: 40px;
+    line-height: 15px;
+}
+
+h3 {
+    position: relative;
+    font-size: 20px;
+    line-height: 15px;
+}
+
+h6 {
+    position:relative;
+    font-size: 3px;
+    line-height: 3px;
+}
+
+input[type=text]{
+    position: relative;
+    font-size: 40px;
+    border: none;
+    width: 200px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    height: 30px;
+    background-color: rgb(196, 196, 196);
+    color: rgb(88, 88, 88);
+    background-image: url(icon16.png);
+    background-size: 15%;
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    padding-left: 50px;
+    resize:none;
+}
+
+input[type=text]:focus{
+    background-color:  rgb(117, 117, 117);
+    color: rgb(212, 212, 212);
+}
+
+
+input[type=submit]{
+    text-align: center;
+    display: block;
+    position: relative;
+    border-radius: 5px;
+    color:rgb(88, 88, 88);
+    background-color: rgb(196, 196, 196);
+    border: none;
+    font-size: 10px;
+    width: 75px;
+    height: 25px;
+    position: 10px 40px;
+}
+
+input[type=submit]:hover{
+    background-color: rgb(117, 117, 117);
+    color: rgb(212, 212, 212);
+}
