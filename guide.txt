@@ -1,0 +1,60 @@
+assumption that everything will be installed onto  the person's browser
+Because of this I just need to work through some main parts
+
+Chrome:
+    - Installing Extension
+        - visit:
+        - click ...
+    - To start recording
+        - click the icon at the top right of your browser (extension bar)
+            - Show picture of entire browser
+        - To switch recording state click the slider
+        - If Green on this means the websites you visit are being sent
+            - Show picture of popup "ON" state
+        - If Red off this means that none of your web information is being sent
+            - Show picture of popup "OFF" state
+    - To change the length of time WEBTRACKER will record for (default is 10 seconds)
+        - Right click the icon of WEBTRACKER
+        - And scroll down to and chose options
+            - Show picture of drop down menu to go to options
+        - Options page will open up in a new tab
+        - To change the amount of time you want to record your information just
+          type in the text box. Time inputted is in milliseconds.
+          So if you want seconds * 1000
+          If you want minutes mutiply by 60000
+            - Show picture of say 30000 out in and caption is for 30 seconds
+        - Click save time and time time recorded will be the new standard
+            - Show picture just in case
+        - You can exit out of tab
+
+Mozilla:
+    - Installing Extension
+        - visit:
+        - click ...
+    - To start recording
+        - click the icon at the top right of your browser (extension bar)
+            - Show picture of entire browser
+        - To switch recording state click the slider
+        - If Green on this means the websites you visit are being sent
+            - Show picture of popup "ON" state
+        - If Red off this means that none of your web information is being sent
+            - Show picture of popup "OFF" state
+    - To change the length of time WEBTRACKER will record for (default is 10 seconds)
+        - Right click the icon of WEBTRACKER
+        - And scroll down to and chose Manage Extension
+            - Show picture of drop down menu to go to Manage Extension
+        - Manage Extension page will open up in a new tab
+        - You should see a screen like this
+            - Show screenshot of manage extension
+        - Go over to Preferences it should look like this
+            - Show screenshot of being on preferences page with textbox present
+        - To change the amount of time you want to record your information just
+          type in the text box. Time inputted is in milliseconds.
+          So if you want seconds * 1000
+          If you want minutes mutiply by 60000
+            - Show picture of say 30000 out in and caption is for 30 seconds
+        - Click save time and time time recorded will be the new standard
+            - Show picture just in case
+        - You can exit out of tab
+
+Now put this into a slide show or word doc and export as PDF
