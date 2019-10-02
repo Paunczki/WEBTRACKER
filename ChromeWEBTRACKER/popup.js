@@ -2,10 +2,12 @@ $(function() {
     $("#togBtn").on('change', function(e) {
         if (e.target.checked){
             chrome.storage.local.set({'sS': true}, function(){
+                chrome.browserAction.setIcon({path: "icon48.png"});
                 //alert('saved: True');
             });
         } else {
             chrome.storage.local.set({'sS': false}, function(){
+                chrome.browserAction.setIcon({path: "iconGray.png"});
                 //alert('saved: False');
             });
         }   

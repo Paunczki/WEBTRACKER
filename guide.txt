@@ -60,6 +60,4 @@ Mozilla:
 Now put this into a word doc and export as PDF
 
 What to work on for next time
-    - Remove timer 
-    - Have logo change colors (if possible)
     - Work on guide
