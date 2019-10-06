@@ -28,6 +28,3 @@ Mozilla:
             - Show picture of popup "OFF" state
 
 Now put this into a word doc and export as PDF
-
-What to work on for next time
-    - Work on guide
