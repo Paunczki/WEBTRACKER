@@ -11,6 +11,6 @@ There are two versions for the extension/addon, one for chrome and one for firef
 Please go to the respective folders for each
 
 ## Download Links
-For Google Chrome: https://chrome.google.com/webstore/detail/web-tracker/meggficlncdkcefnkpgbihhldbhfbell?authuser=1
+For Google Chrome: https://bit.ly/2OxY82o 
 
-For Mozilla Firefox: https://addons.mozilla.org/en-US/firefox/addon/web-tracker/
+For Mozilla Firefox: https://mzl.la/2LYZBgs
