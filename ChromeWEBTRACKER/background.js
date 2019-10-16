@@ -8,6 +8,11 @@ function getRandomToken() {
     return hex;
 }
 
+chrome.storage.local.set({'sS': true}, function(){
+    chrome.browserAction.setIcon({path: "icon48.png"});
+    //alert('saved: True');
+});
+
 var userid;
 chrome.storage.local.get('userid', function(items) {
     userid = items.userid;
@@ -52,6 +57,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             chrome.storage.local.set({'sendDone':sendDone}, function(){});
             chrome.storage.local.get('sendDone', function(status){
                 sendInfo(status.sendDone);
+                // alert(sendDone);
             });
         }
         if(changeInfo.status === 'loading'){
@@ -72,10 +78,12 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             if((preU !== newU)&&(!(preU==='undefined'))&&(!(preU==='newtab'))&&(!(newU==='newtab'))){
                 var sendEnd = Date.now() + ":" + userid + ":" + tabId + ":" + preU + ":0";
                 sendInfo(sendEnd);
+                // alert(sendEnd);
             }
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
                 var sendStart = Date.now() + ":" + userid + ":" + tabId + ":" + newU + ":1";
                 sendInfo(sendStart);
+                // alert(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;
         }
@@ -97,6 +105,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
         if(!(preU === 'newtab')&&(!(preU === undefined))){
             var sendClosed = Date.now() + ":" + userid + ":" + tabId + ":" + preU + ":0";
             sendInfo(sendClosed);
+            // alert(sendClosed);
         }
     }
 });

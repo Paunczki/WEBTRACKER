@@ -8,6 +8,11 @@ function getRandomToken() {
     return hex;
 }
 
+chrome.storage.local.set({'sS': true}, function(){
+    chrome.browserAction.setIcon({path: "icon48.png"});
+    //alert('saved: True');
+});
+
 var userid;
 browser.storage.local.get('userid', function(items) {
     userid = items.userid;
