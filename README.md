@@ -11,9 +11,6 @@ There are two versions for the extension/addon, one for chrome and one for firef
 Please go to the respective folders for each
 
 ## Download Links
-For Google Chrome: https://bit.ly/2OxY82o 
+For Google Chrome: 
 
-For Mozilla Firefox: https://bit.ly/2MLh37p
-
-What to do
-- Fix the manual and add a table of contents
+For Mozilla Firefox: https://bit.ly/35zBfln
