@@ -13,4 +13,8 @@ Please go to the respective folders for each
 ## Download Links
 For Google Chrome: https://bit.ly/2OxY82o 
 
-For Mozilla Firefox: https://mzl.la/2LYZBgs
+For Mozilla Firefox: https://bit.ly/2MLh37p
+
+What to do
+- Make it so its on, on first install
+- Fix the manual and add a table of contents
