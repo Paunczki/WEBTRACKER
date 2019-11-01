@@ -16,6 +16,5 @@ For Google Chrome: https://bit.ly/2MLIHRQ
 For Mozilla Firefox: https://bit.ly/35zBfln
 
 
-What needs to be completed
-- Make sure you start with on
+## What needs to be completed
 - Disable on if after time

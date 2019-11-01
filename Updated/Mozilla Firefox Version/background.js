@@ -8,19 +8,25 @@ function getRandomToken() {
     return hex;
 }
 
+function startState() {
+    return 1;
+}
+
 var start;
-browser.storage.local.get('sS', function(items){
-    start = items.sS;
+browser.storage.local.get('start', function(items){
+    start = items.start;
     if(start){
+        // hopefully works good
+    }
+    else{
+        start = startState();
+        browser.storage.local.set({start: start}, function() {});
         browser.storage.local.set({'sS': true}, function(){
             browser.browserAction.setIcon({path: "icon48.png"});
             // alert('saved: True');
         });
     }
-    else{
-        // Works good
-    }
-})
+});
 
 var userid;
 browser.storage.local.get('userid', function(items) {
