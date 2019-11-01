@@ -94,7 +94,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             if((preU !== newU)&&(!(newU==='newtab'))&&(changeInfo.status === 'loading')){
                 // var sendStart = userid + "," + tabId + "," + newU + ",1," + Date.now();
                 var sendStart = Date.now() + ":" + userid + ":" + tabId + ":" + newU + ":1";
-                // alert(sendStart);
+                alert(sendStart);
                 sendInfo(sendStart);
             }
             tabIdToPreviousUrl[tabId] = changeInfo.url;

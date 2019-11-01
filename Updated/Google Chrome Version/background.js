@@ -8,10 +8,19 @@ function getRandomToken() {
     return hex;
 }
 
-chrome.storage.local.set({'sS': true}, function(){
-    chrome.browserAction.setIcon({path: "icon48.png"});
-    //alert('saved: True');
-});
+var start;
+chrome.storage.local.get('sS', function(items){
+    start = items.sS;
+    if(start){
+        chrome.storage.local.set({'sS': true}, function(){
+            chrome.browserAction.setIcon({path: "icon48.png"});
+            // alert('saved: True');
+        });
+    }
+    else{
+        // Works good
+    }
+})
 
 var userid;
 chrome.storage.local.get('userid', function(items) {
@@ -24,11 +33,11 @@ chrome.storage.local.get('userid', function(items) {
         chrome.storage.local.set({userid: userid}, function() {});
     }
     function useToken(userid) {
-        // alert(userid);
+        //alert(userid);
     }
 });
 
-var timeIncrement = 1580515200000;
+var tabIdToPreviousUrl = {};
 
 function sendInfo(input){
     // alert("hello " + input);
@@ -48,11 +57,6 @@ chrome.storage.local.get('sS', function(status){
 });
 
 var time = 1580515200000;
-chrome.storage.sync.set({'time' : time}, function(){});
-
-chrome.storage.local.get('time', function(stamp){
-    timeIncrement = stamp.time;
-})
 
 chrome.storage.onChanged.addListener(function() {
     chrome.storage.local.get('sS', function(status){
@@ -62,7 +66,7 @@ chrome.storage.onChanged.addListener(function() {
 
 var newWebsite; var previousWebsite;
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-    if((switchStatus === true)&&(Date.now() < timeIncrement)){
+    if((switchStatus === true)&&(Date.now() < time)){
         if((!(newWebsite === previousWebsite))&&(!(newWebsite === 'newtab'))&&(changeInfo.status === 'complete')){
             // var sendDone = userid + "," + tabId + "," + newWebsite + ",2," + Date.now();
             var sendDone = Date.now() + ":" + userid + ":" + tabId + ":" + newWebsite + ":2";
@@ -102,7 +106,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
             tabIdToPreviousUrl[tabId] = changeInfo.url;
         }
     }
-    if((switchStatus === true)&&(Date.now() > timeIncrement)){
+    if((switchStatus === true)&&(Date.now() > time)){
         chrome.storage.local.set({'sS': false}, function(){
             switchStatus = false;
         });
@@ -110,7 +114,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 });
 
 chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
-    if((switchStatus === true)&&(Date.now() < timeIncrement)){
+    if((switchStatus === true)&&(Date.now() < time)){
         var previousUrl = "";
         previousUrl = tabIdToPreviousUrl[tabId];
         var preU = ''; 
@@ -128,7 +132,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
             sendInfo(sendClosed);
         }
     }
-    if((switchStatus === true)&&(Date.now() > timeIncrement)){
+    if((switchStatus === true)&&(Date.now() > time)){
         chrome.storage.local.set({'sS': false}, function(){
             switchStatus = false;
         });
