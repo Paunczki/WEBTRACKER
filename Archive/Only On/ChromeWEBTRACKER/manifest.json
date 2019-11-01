@@ -1,0 +1,35 @@
+{
+    "manifest_version" : 2,
+    "name" : "Web Tracker",
+    "version" : "2.1",
+    "description" : "Tracks packets to and from your device.",
+    "icons" : {
+        "128" : "icon128.png",
+        "48" : "icon48.png",
+        "16" : "icon16.png"
+    },
+    "browser_action" : {
+        "default_icon" : "icon48.png",
+        "default_popup" : "popup.html"
+    },
+    "content_scripts":[{
+        "matches": ["*://a/*"],
+        "all_frames" : true,
+        "js": ["jquery-3.4.1.min.js"]
+        }
+    ],
+    
+    "permissions" : [
+        "storage",
+        "background",
+        "tabs",
+        "http://*/*",
+        "https://*/*",
+        "http://localhost/*"
+    ],
+
+    "background" : {
+        "scripts" : ["jquery-3.4.1.min.js", "background.js"],
+        "persistent": true
+    }
+}
