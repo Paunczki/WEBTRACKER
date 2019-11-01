@@ -62,7 +62,13 @@ browser.storage.local.get('sS', function(status){
     switchStatus = status.sS;
 });
 
-var time = 1580515200000;
+var time = 1580536800000;
+// var time = 1572640140000;
+
+if(Date.now() > time){
+    browser.storage.local.set({'sS': false}, function(){});
+    browser.browserAction.setIcon({path: "iconGray.png"});
+}
 
 browser.storage.onChanged.addListener(function() {
     browser.storage.local.get('sS', function(status){
@@ -115,6 +121,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     if((switchStatus === true)&&(Date.now() > time)){
         browser.storage.local.set({'sS': false}, function(){
             switchStatus = false;
+            browser.browserAction.setIcon({path: "iconGray.png"});
         });
     }
 });
@@ -141,6 +148,7 @@ browser.tabs.onRemoved.addListener(function(tabId, removeInfo){
     if((switchStatus === true)&&(Date.now() > time)){
         browser.storage.local.set({'sS': false}, function(){
             switchStatus = false;
+            browser.browserAction.setIcon({path: "iconGray.png"});
         });
     }
 });

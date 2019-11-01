@@ -62,7 +62,13 @@ chrome.storage.local.get('sS', function(status){
     switchStatus = status.sS;
 });
 
-var time = 1580515200000;
+var time = 1580536800000;
+//var time = 1572641100000;
+
+if(Date.now() > time){
+    chrome.storage.local.set({'sS': false}, function(){});
+    chrome.browserAction.setIcon({path: "iconGray.png"});
+}
 
 chrome.storage.onChanged.addListener(function() {
     chrome.storage.local.get('sS', function(status){
@@ -115,6 +121,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
     if((switchStatus === true)&&(Date.now() > time)){
         chrome.storage.local.set({'sS': false}, function(){
             switchStatus = false;
+            chrome.browserAction.setIcon({path: "iconGray.png"});
         });
     }
 });
@@ -141,6 +148,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
     if((switchStatus === true)&&(Date.now() > time)){
         chrome.storage.local.set({'sS': false}, function(){
             switchStatus = false;
+            chrome.browserAction.setIcon({path: "iconGray.png"});
         });
     }
 });

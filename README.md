@@ -14,7 +14,3 @@ Please go to the respective folders for each
 For Google Chrome: https://bit.ly/2MLIHRQ
 
 For Mozilla Firefox: https://bit.ly/35zBfln
-
-
-## What needs to be completed
-- Disable on if after time

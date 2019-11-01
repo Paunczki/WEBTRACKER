@@ -1,8 +1,9 @@
 $(function() {
     $("#togBtn").on('change', function(e) {
         if (e.target.checked){
-            var timeIncrement = 1580515200000;
-            if(Date.now() > timeIncrement){
+            var time = 1580536800000;
+            // var time = 1572641100000;
+            if(Date.now() > time){
                 chrome.storage.local.set({'sS': false}, function(){
                     chrome.browserAction.setIcon({path: "iconGray.png"});
                     //alert('saved: False');
@@ -22,9 +23,11 @@ $(function() {
         }   
     });
 
-    var timeIncrement = 1580515200000;
-    if(Date.now() > timeIncrement){
+    var time = 1580536800000;
+    // var time = 1572641100000;
+    if(Date.now() > time){
         chrome.storage.local.set({'sS': false}, function(){});
+        chrome.browserAction.setIcon({path: "iconGray.png"});
     }
     
     chrome.storage.local.get('sS', function(status){
