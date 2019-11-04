@@ -48,7 +48,7 @@ var tabIdToPreviousUrl = {};
 function sendInfo(input){
     // alert("hello " + input);
     var request = new XMLHttpRequest();
-    var url = "https://webtracker.cs.luc.edu/" + input;
+    var url = "https://webtracker.cs.luc.edu/WebTracker/" + input;
     request.open("POST", url, true); 
     request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8"); 
     request.send("data");
