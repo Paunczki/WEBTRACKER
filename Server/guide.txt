@@ -1,0 +1,18 @@
+We will take the logs from the server and use java to split, since I am most comfortable with that language
+
+The data we want is packed together as WebTracker/timestamp:uniqueID:tabID:domain:progress
+We want to split by spaces and then call the substring method to see if WebTracker is present
+
+What we can do with the data
+    - We can wee what websites are visited the most
+        - Use hashmap with counter as value
+    - We can take timestamp data and see how many websites people are usually using at a time 
+        - Maybe this is a 5 second buffer to count as not one site
+    - Take the time difference loading and complete
+    - See how long someone stays on a site (average over time?) 2->0
+    - See website patterns what sites follow each other
+        - Basically count number of times a 0-1 relationship happens
+    - Average number of tab switches (make sure to see if a tab was closed and such)
+    - Does longer progress mean less or more websites loaded at a time
+    - Could look at each uniqueID's browsing patterns, but might be overkill
+        - speak to Eric if we want inividual level or just overall browsing
