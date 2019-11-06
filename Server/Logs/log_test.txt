@@ -33,4 +33,3 @@
 - - [06/Nov/2019:21:12:02 +0000] "POST /WebTracker/1573074722371:ceda49c0d4ae4130:1427:www.google.com:0 HTTP/1.1" 404 521 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36"
 - - [06/Nov/2019:21:12:02 +0000] "POST /WebTracker/1573074722372:ceda49c0d4ae4130:1427:www.youtube.com:1 HTTP/1.1" 404 521 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36"
 - - [06/Nov/2019:21:12:04 +0000] "POST /WebTracker/1573074724283:ceda49c0d4ae4130:1427:www.youtube.com:2 HTTP/1.1" 404 521 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36"
-
