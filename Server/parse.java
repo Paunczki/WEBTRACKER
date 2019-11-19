@@ -18,57 +18,76 @@ public class parse{
                     users.put(d[1], a);
                 }
                 if(users.containsKey(d[1])){
-                    String e = d[0] + ":" + d[2] + ":" + d[4];
-                    //       timestamp     tabID       progress
-                    //          0            1            2
+                    String e = d[0] + ":" + d[2] + ":" + d[4] + ":" + d[3];
+                    //       timestamp     tabID       progress     website
+                    //          0            1            2            3
                     users.get(d[1]).add(e);
                 }
             }
         }
         
+        HashMap<String, Double> percents = new HashMap<>();
         for(String user:users.keySet()){
-            String tabID = users.get(user).get(0);
-            boolean siteChange = false;
+            String tabID = "";
             int countChange = 0;
             int countOverlap = 0;
+            HashMap<String, String> open = new HashMap<>();
             for(int i=0; i<users.get(user).size(); i++){
                 String[] info = users.get(user).get(i).split(":");
-                if(i == 0){tabID = info[1];}
-                if(info[2].equals("1")){
-                    countChange++;
-                    siteChange = true;
-                }
-                System.out.println((!info[1].equals(tabID))&&(siteChange == true));
-                if((!info[1].equals(tabID))&&(siteChange == true)){
-                    countOverlap++;
+                if(i == 0){
                     tabID = info[1];
                 }
                 if(info[2].equals("0")){
-                    siteChange = false;
+                    open.put(info[1], "closed");
+                }
+                if(info[2].equals("1")){
+                    countChange++;
+                    open.put(info[1], "open");
+                }
+                if(info[2].equals("2")){
+                    open.put(info[1], "open");
+                }
+                if((open.get(tabID).equals("open"))&&(!tabID.equals(info[1]))){
+                    // See if overlap
+                    countOverlap++;
+                }
+                if(!info[2].equals("0")){
+                    // Update tabID
+                    tabID = info[1];
                 }
             }
-            System.out.println(countOverlap + " / " + countChange);
+            double percent = (countOverlap*1.0)/countChange;
+            percents.put(user, percent);
         }
+
+        int countZero = 0;
+        int countOverlappers = 0;
+        double sumPercent = 0;
+        for(String user: percents.keySet()){
+            if(percents.get(user) == 0.0){
+                countZero++;
+            }
+            if((percents.get(user)>0.0) && (percents.get(user)<1.0)){
+                countOverlappers++;
+                sumPercent += percents.get(user);
+            }
+        }
+        // countZero is the number of people who do not overlap
+        // countOverlappers is the number of people who overlap sites
+        if(countOverlappers != 0){
+            double averagePercent = sumPercent / countOverlappers;
+            System.out.println(averagePercent);
+        }
+        System.out.println((countOverlappers*1.0) / (countOverlappers+countZero));
         scanner.close();
+
+
+
+        /*
+            1) For each user get number of website visits and number of times there were overlapped websites 
+               (that is, start visiting one website before previous website(s) finished loading)
+            2) If there is an overlap, see how many websites are in the overlap
+            3) For each overlap, what is the length of time of the overlap
+        */
     }
 }
-
-/*
-    Want to first see if we can see if an overlap is detected, and as an added bonus try to make it efficient as possible
-
-    We want to do this by sorting each section by a unique ID, which each user has
-        - First create an HashMap of user as key and value being ArrayList<String> of all activity (include the whole info string)
-        - This iterates through logs and now we only need to iterte through our structure
-
-        - Create a new HashMap of key as UserID and value a percentage placeholder
-        - Iterating through the datastructure
-            - We want to count overlaps, to do this we should have a running variable
-            - The variable will be an int for the tabID
-            - We want to check for every value within the datastructure to see if it is a 0, meaning the tabID was closed
-            - If the tabID was not closed and another tabID has information passed, then we know an overlap has occurred
-            - Increase a counter variable for each UserID by one for each overlap
-            - Additionally for every 1 encountered increase another counter by 1
-        - Once we have iterated through each UserID's ArrayList, save to another datastructure the percent, 
-            - percent calculated by dividing the number of overlaps by the number of site changes
-    - We can then get an overall average percentage by iterating through each user, or doing it directly
-*/

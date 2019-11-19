@@ -4,7 +4,7 @@ The data we want is packed together as WebTracker/timestamp:uniqueID:tabID:domai
 We want to split by spaces and then call the substring method to see if WebTracker is present
 
 What we can do with the data
-    - We can wee what websites are visited the most
+    - We can see what websites are visited the most
         - Use hashmap with counter as value
     - We can take timestamp data and see how many websites people are usually using at a time 
         - Maybe this is a 5 second buffer to count as not one site
@@ -16,3 +16,6 @@ What we can do with the data
     - Does longer progress mean less or more websites loaded at a time
     - Could look at each uniqueID's browsing patterns, but might be overkill
         - speak to Eric if we want inividual level or just overall browsing
+
+How to organize, 
+Eventually we may want to create separate classes that are called to do a certain test and such
