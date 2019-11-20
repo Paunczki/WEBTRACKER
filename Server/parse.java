@@ -3,7 +3,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class parse{
-    static String filepath = "Server/Logs/log_test.txt";
+    static String filepath = "Server/Logs/november20.log";
     static File log = new File(filepath);
     public static void main(String[] args) throws FileNotFoundException{
         Scanner scanner = new Scanner(log);
@@ -11,19 +11,23 @@ public class parse{
         while(scanner.hasNextLine()){
             String line = scanner.nextLine();
             String[] b = line.split(" ");
-            if(b[4].equals("\"POST")){
-                String[] c = b[5].split("/");
-                String[] d = c[2].split(":");
-                if(!users.containsKey(d[1])){
-                    ArrayList<String> a = new ArrayList<>();
-                    users.put(d[1], a);
+            try{
+                if(b[4].equals("\"POST")){
+                    String[] c = b[5].split("/");
+                    String[] d = c[2].split(":");
+                    if(!users.containsKey(d[1])){
+                        ArrayList<String> a = new ArrayList<>();
+                        users.put(d[1], a);
+                    }
+                    if(users.containsKey(d[1])){
+                        String e = d[0] + ":" + d[2] + ":" + d[4] + ":" + d[3];
+                        //       timestamp     tabID       progress     website
+                        //          0            1            2            3
+                        users.get(d[1]).add(e);
+                    }
                 }
-                if(users.containsKey(d[1])){
-                    String e = d[0] + ":" + d[2] + ":" + d[4] + ":" + d[3];
-                    //       timestamp     tabID       progress     website
-                    //          0            1            2            3
-                    users.get(d[1]).add(e);
-                }
+            }catch(Exception e){
+                continue;
             }
         }
         
@@ -106,13 +110,15 @@ public class parse{
         */
 
         for(String user: overlaps.keySet()){
-            System.out.println("Number of overlaps: " + overlaps.get(user).size());
+            System.out.println("Number of overlaps for " + user + ": " + overlaps.get(user).size());
             for(int i=0; i<overlaps.get(user).size(); i++){
-                System.out.println("  - Overlap " + (i+1) + " was " + (overlaps.get(user).get(i)/1000.0) + " seconds long");
-                System.out.println("With " + numSites.get(user).get(i) + " websites accessed within the overlap");
+                //System.out.println("  - Overlap " + (i+1) + " was " + (overlaps.get(user).get(i)/1000.0) + " seconds long");
+                //System.out.println("  - With " + numSites.get(user).get(i) + " websites accessed within the overlap");
             }
         }
-        
+        // cp to copy to /home/john/
+        // scp to save to local computer
+
         scanner.close();
     }
 }
