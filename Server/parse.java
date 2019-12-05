@@ -1,6 +1,7 @@
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.lang.Math;
 
 public class parse{
     static String filepath = "Server/Logs/november20.log";
@@ -41,13 +42,31 @@ public class parse{
             HashMap<String, String> open = new HashMap<>();
             Long beginLap = 0L;
             Long endLap = 0L;
-            // int numWebsitesInOverlap = 0;
             ArrayList<Long> time = new ArrayList<>();
             ArrayList<Integer> sitesPresent = new ArrayList<>();
             for(int i=0; i<users.get(user).size(); i++){
                 String[] info = users.get(user).get(i).split(":");
                 if(info[2].equals("0")){
                     open.remove(info[1]);
+                }
+                if(info.length < 4){
+                    continue;
+                }
+
+                if((open.size()>1) && (overlap == true) && (info[2].equals("1"))){
+                    countOverlap++;
+                }
+                
+                if((overlap == true) && (open.size()>1) && (Long.parseLong(info[0]) > (beginLap + 20000)) && (countOverlap == 2)){
+                    overlap = false;
+                    countOverlap = 0;
+                    open.clear();
+                }
+
+                if(((info[3].equals("www.google.com")) || (info[3].equals("duckduckgo.com"))) && (info[2].equals("1"))){
+                    open.put(info[1], "closed");
+                    countChange++;
+                    continue;
                 }
                 if(info[2].equals("1")){
                     countChange++;
@@ -56,16 +75,20 @@ public class parse{
                 if(info[2].equals("2")){
                     open.remove(info[1]);
                 }
-                
-                if((open.size()>1) && (overlap == true) && (info[2].equals("1"))){
-                    countOverlap++;
-                }
 
                 if((open.size()<2) && (overlap == true)){
                     endLap = Long.parseLong(info[0]);
                     overlap = false;
+                    if ((endLap - beginLap) > 20000){
+                        countOverlap = 0;
+                        open.clear();
+                        continue;
+                    }
                     time.add(endLap - beginLap);
                     sitesPresent.add(countOverlap);
+                    System.out.println(sitesPresent);
+                    countOverlap = 0;
+                    continue;
                 }
                 if((open.size()>1) && (overlap == false)){
                     beginLap = Long.parseLong(info[0]);
@@ -73,51 +96,53 @@ public class parse{
                     countOverlap += 2;
                 }
             }
-            double percent = (countOverlap*1.0)/countChange;
-            percents.put(user, percent);
             overlaps.put(user, time);
+            double percent = ((overlaps.get(user).size()-1)*100.0)/countChange;
+            percents.put(user, percent);
             numSites.put(user, sitesPresent);
         }
-
-        /*
-        int countZero = 0;
-        int countOverlappers = 0;
-        double sumPercent = 0;
-        for(String user: percents.keySet()){
-                // Here I need to do the following overlap information
-                //  1) For each user get number of times there were overlapped websites 
-                //     (that is, start visiting one website before previous website(s) finished loading)
-                //  2) If there is an overlap, see how many websites are in the overlap
-                //  3) For each overlap, what is the length of time of the overlap
-            if(percents.get(user) == 0.0){
-                countZero++;
-            }
-            if((percents.get(user)>0.0) && (percents.get(user)<1.0)){
-                countOverlappers++;
-                sumPercent += percents.get(user);
-            }
-        }
-
-        // countZero is the number of people who do not overlap
-        // countOverlappers is the number of people who overlap sites
-        if(countOverlappers != 0){
-            double averagePercent = sumPercent / countOverlappers;
-            System.out.println(averagePercent);
-        }
-        System.out.println((countOverlappers*1.0) / (countOverlappers+countZero));
-        // System.out.println("Number of sites visited: " + countChange);
-        System.out.println("Number of times there were overlaps: " + 0 + "\n\n"); // Need to complete
-        */
+        System.out.println("");
 
         for(String user: overlaps.keySet()){
             System.out.println("Number of overlaps for " + user + ": " + overlaps.get(user).size());
+            // System.out.println(overlaps.get(user));
+
+            double tot_time = 0;
+            int num_overlaps = 0;
+            ArrayList<Double> for_median = new ArrayList<>();
             for(int i=0; i<overlaps.get(user).size(); i++){
-                //System.out.println("  - Overlap " + (i+1) + " was " + (overlaps.get(user).get(i)/1000.0) + " seconds long");
-                //System.out.println("  - With " + numSites.get(user).get(i) + " websites accessed within the overlap");
+                num_overlaps++;
+                tot_time += overlaps.get(user).get(i) / 1000.0;
+                double temp = overlaps.get(user).get(i) / 1000.0;
+                for_median.add(temp);
             }
+            double avg_time = tot_time / num_overlaps;
+            System.out.println("Average Time of overlaps was " + avg_time + " seconds");
+
+            Collections.sort(for_median);
+            double median = for_median.get(for_median.size() / 2);
+            System.out.println("Median Time of overlaps was " + median + " seconds");
+
+            double tot_site_overlap = 0.0;
+            for(int j=0; j<numSites.get(user).size(); j++){
+                tot_site_overlap += numSites.get(user).get(j);
+            }
+            double avg_sites_per_overlap = tot_site_overlap / num_overlaps;
+            System.out.println("Average Number of sites in an overlap was " + avg_sites_per_overlap);
+
+            System.out.println("Percent of visits being overlaps " + percents.get(user) + "%");
+
+            // Standard Deviation
+            double tot_x = 0;
+            for(int x=0; x<overlaps.get(user).size(); x++){
+                double temp = (overlaps.get(user).get(x)/1000.0) - avg_time;
+                tot_x += temp * temp;
+            }
+            double std_dev = Math.sqrt(tot_x / (overlaps.get(user).size()-1));
+            System.out.println("Standard Deviation of time was " + std_dev);
+
+            System.out.println("");
         }
-        // cp to copy to /home/john/
-        // scp to save to local computer
 
         scanner.close();
     }
