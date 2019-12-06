@@ -10,7 +10,6 @@ The extension seems to work really well for the sites.
 The main issue is that sometimes with listeners some sites do not send a complete request and skews the data in the Server folder. 
 There is a method to remove this from happening, but be sure to remove if needed. 
 
-The only issue currently is that the number of overlapped sites is always 2, this could be true or poor parse code by me.
 If you need help on understanding or to work further on the project please contact Eric or I.
 
 

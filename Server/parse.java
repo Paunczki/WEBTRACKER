@@ -4,7 +4,7 @@ import java.util.*;
 import java.lang.Math;
 
 public class parse{
-    static String filepath = "Server/Logs/november2019.log";
+    static String filepath = "Server/Logs/all_results.log";
     static File log = new File(filepath);
     public static void main(String[] args) throws FileNotFoundException{
         Scanner scanner = new Scanner(log);
@@ -35,7 +35,9 @@ public class parse{
         HashMap<String, Double> percents = new HashMap<>();
         HashMap<String, ArrayList<Long>> overlaps = new HashMap<>();
         HashMap<String, ArrayList<Integer>> numSites = new HashMap<>();
+        HashMap<String, HashMap<String, Integer>> top_sites = new HashMap<>();
         for(String user:users.keySet()){
+            top_sites.put(user, new HashMap<String, Integer>());
             int countChange = 0;
             int countOverlap = 0;
             boolean overlap = false;
@@ -63,12 +65,39 @@ public class parse{
                     open.clear();
                 }
 
-                if(((info[3].equals("www.google.com")) || (info[3].equals("duckduckgo.com"))) && (info[2].equals("1"))){
+                if((info[3].equals("www.google.com")) && (info[2].equals("1"))){
+                    if(!top_sites.get(user).containsKey(info[3])){
+                        top_sites.get(user).put(info[3], 1);
+                    }
+                    else{
+                        int temp = top_sites.get(user).get(info[3]) + 1;
+                        top_sites.get(user).put(info[3], temp);
+                    }
+                    open.put(info[1], "closed");
+                    countChange++;
+                    continue;
+                }
+
+                if((info[3].equals("duckduckgo.com")) && (info[2].equals("1"))){
+                    if(!top_sites.get(user).containsKey(info[3])){
+                        top_sites.get(user).put(info[3], 1);
+                    }
+                    else{
+                        int temp = top_sites.get(user).get(info[3]) + 1;
+                        top_sites.get(user).put(info[3], temp);
+                    }
                     open.put(info[1], "closed");
                     countChange++;
                     continue;
                 }
                 if(info[2].equals("1")){
+                    if(!top_sites.get(user).containsKey(info[3])){
+                        top_sites.get(user).put(info[3], 1);
+                    }
+                    else{
+                        int temp = top_sites.get(user).get(info[3]) + 1;
+                        top_sites.get(user).put(info[3], temp);
+                    }
                     countChange++;
                     open.put(info[1], "open");
                 }
@@ -141,9 +170,43 @@ public class parse{
             double std_dev = Math.sqrt(tot_x / (overlaps.get(user).size()-1));
             System.out.println("Standard Deviation of time was " + std_dev);
 
+            int tot_visits = 0;
+            for(String site: top_sites.get(user).keySet()){
+                tot_visits += top_sites.get(user).get(site);
+            }
+            System.out.println("Number of total site visits: " + tot_visits);
+            System.out.println("Total number of different sites visited by user: " + top_sites.get(user).size());
+            
+            // Need to order site by views
+            ArrayList<String> site_name = new ArrayList<>();
+            ArrayList<Integer> site_times = new ArrayList<>();
+            for(String site: top_sites.get(user).keySet()){
+                if(site_times.size() == 0){
+                    String a = site + ": " + top_sites.get(user).get(site);
+                    site_name.add(a);
+                    site_times.add(top_sites.get(user).get(site));
+                }
+                int current_occur = top_sites.get(user).get(site);
+                boolean changed = true;
+                for(int i=0; i< site_times.size(); i++){
+                    if((current_occur > site_times.get(i)) && changed){
+                        String a = site + ": " + top_sites.get(user).get(site);
+                        site_name.add(i, a);
+                        site_times.add(i, top_sites.get(user).get(site));
+                        changed = false;
+                    }
+                }
+                if(changed){
+                    String a = site + ": " + top_sites.get(user).get(site);
+                    site_name.add(a);
+                    site_times.add(top_sites.get(user).get(site));
+                }
+            }
+            System.out.println("Sites by number of visits: " + site_name);
+
             System.out.println("");
         }
-
+        
         scanner.close();
     }
 }
