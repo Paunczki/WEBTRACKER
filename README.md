@@ -1,14 +1,18 @@
 # WEBTRACKER: Building a Chrome Extension to Track Websites Visited
-Project was presented at a school conference for research (FYRE).
-See attached poster for more detail (Webtracker_Poster_Final.pdf)
-
-This extension allows you to record the timestamps of when you changed websites through google chrome. 
-For exaple, when you go from google to youtube it will tell you at what time google was left, what time youtube began loading, and finally at what time youtube completed loading.
+This extension allows you to record the timestamps of when you changed websites through Google Chrome or Mozilla Firefox. 
+For exaple, when you go from google.com to youtube.com it will tell you at what time google was left, what time youtube began loading, and finally at what time youtube completed loading.
 This is done using chrome API and JavaScript knowledge to achieve this output.
 Also outputs these timestamps with information to a server for later analysis.
 
-There are two versions for the extension/addon, one for chrome and one for firefox
-Please go to the respective folders for each
+
+## For future developers
+The extension seems to work really well for the sites. 
+The main issue is that sometimes with listeners some sites do not send a complete request and skews the data in the Server folder. 
+There is a method to remove this from happening, but be sure to remove if needed. 
+
+The only issue currently is that the number of overlapped sites is always 2, this could be true or poor parse code by me.
+If you need help on understanding or to work further on the project please contact Eric or I.
+
 
 ## Download Links
 For Google Chrome: https://bit.ly/32h9sDo

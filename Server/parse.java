@@ -4,7 +4,7 @@ import java.util.*;
 import java.lang.Math;
 
 public class parse{
-    static String filepath = "Server/Logs/november20.log";
+    static String filepath = "Server/Logs/november2019.log";
     static File log = new File(filepath);
     public static void main(String[] args) throws FileNotFoundException{
         Scanner scanner = new Scanner(log);
@@ -86,7 +86,7 @@ public class parse{
                     }
                     time.add(endLap - beginLap);
                     sitesPresent.add(countOverlap);
-                    System.out.println(sitesPresent);
+                    // System.out.println(sitesPresent);
                     countOverlap = 0;
                     continue;
                 }
