@@ -100,7 +100,7 @@ public class parse{
                 }
 
                 if((info[3].equals("www.google.com")) && (info[2].equals("1"))){
-                    // google.com never sends a "Loaded" information so this is a way around now counting it
+                    // google.com never sends a "Loaded" request so this is a way around now counting it
                     // makes sense since google.com loads quickly
                     if(!top_sites.get(user).containsKey(info[3])){
                         top_sites.get(user).put(info[3], 1);
@@ -109,13 +109,14 @@ public class parse{
                         int temp = top_sites.get(user).get(info[3]) + 1;
                         top_sites.get(user).put(info[3], temp);
                     }
-                    System.out.println(open);
-                    open.put(info[1], "closed");
+                    // System.out.println(open);
+                    open.remove(info[1]);
                     countChange++;
                     continue;
                 }
 
                 if((info[3].equals("duckduckgo.com")) && (info[2].equals("1"))){
+                    // duckduckgo.com also neversend a "Loaded" request
                     if(!top_sites.get(user).containsKey(info[3])){
                         top_sites.get(user).put(info[3], 1);
                     }
@@ -123,26 +124,32 @@ public class parse{
                         int temp = top_sites.get(user).get(info[3]) + 1;
                         top_sites.get(user).put(info[3], temp);
                     }
-                    open.put(info[1], "closed");
+                    open.remove(info[1]);
                     countChange++;
                     continue;
                 }
                 if(info[2].equals("1")){
                     if(!top_sites.get(user).containsKey(info[3])){
+                        // First time a site was visited for the unique ID
                         top_sites.get(user).put(info[3], 1);
                     }
                     else{
+                        // Increment times a certain site was visited for the unique ID
                         int temp = top_sites.get(user).get(info[3]) + 1;
                         top_sites.get(user).put(info[3], temp);
                     }
                     countChange++;
                     open.put(info[1], "open");
+                    // Puts this site as active (to see for overlap)
                 }
                 if(info[2].equals("2")){
                     open.remove(info[1]);
+                    // removes site from active
                 }
 
                 if((open.size()<2) && (overlap == true)){
+                    // See that there is no longer an overlap
+                    // Will now store information
                     endLap = Long.parseLong(info[0]);
                     overlap = false;
                     if ((endLap - beginLap) > 20000){
@@ -157,11 +164,14 @@ public class parse{
                     continue;
                 }
                 if((open.size()>1) && (overlap == false)){
+                    // See an overlap is present and turns overlap to true
                     beginLap = Long.parseLong(info[0]);
                     overlap = true;
                     countOverlap += 2;
                 }
             }
+            // Now to save certain measurements to each unique user 
+            // meant so I can print in the end
             overlaps.put(user, time);
             double percent = ((overlaps.get(user).size()-1)*100.0)/countChange;
             percents.put(user, percent);
@@ -170,12 +180,15 @@ public class parse{
         System.out.println("");
 
         /*
-        *   This loop is 
+        *   This loop loops over all the stored length of overlaps
         */
         for(String user: overlaps.keySet()){
             System.out.println("Number of overlaps for " + user + ": " + overlaps.get(user).size());
+            // This is just the number of overlaps recorded for that unique ID
             // System.out.println(overlaps.get(user));
 
+            // all that follows finds the average, median, percent and standard deviation of length 
+            // of overlaps
             double tot_time = 0;
             int num_overlaps = 0;
             ArrayList<Double> for_median = new ArrayList<>();
