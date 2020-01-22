@@ -1,5 +1,5 @@
 import java.io.*;
-import java.lang.reflect.Array;
+// import java.lang.reflect.Array;
 import java.util.*;
 import java.lang.Math;
 
@@ -198,6 +198,9 @@ public class parse{
                 }
                 if(changed){
                     String a = site + ": " + top_sites.get(user).get(site);
+                    if(site_name.contains(a)){
+                        continue;
+                    }
                     site_name.add(a);
                     site_times.add(top_sites.get(user).get(site));
                 }
