@@ -1,26 +1,47 @@
+/*
+*   Here is a list of functions that works to show us results from the logs 
+*
+*   All static and main for simplicity
+*/
+
 import java.io.*;
 // import java.lang.reflect.Array;
 import java.util.*;
 import java.lang.Math;
 
 public class parse{
+    // Change this filepath variable to log you want to use
     static String filepath = "Server/Logs/all_results.log";
     static File log = new File(filepath);
     public static void main(String[] args) throws FileNotFoundException{
         Scanner scanner = new Scanner(log);
+
+        /*
+        *   This while loop begins by going through each line of the log being used
+        *   It identifies what lines are POST requests to the WebTracker server
+        *   
+        *   It then saves all sitevisited infrmation to each unique user in Hashmap "users"
+        */
         HashMap<String, ArrayList<String>> users = new HashMap<>();
         while(scanner.hasNextLine()){
             String line = scanner.nextLine();
             String[] b = line.split(" ");
+            // - - [01/Dec/2019:23:55:43 +0000] "POST /WebTracker/1575244543769:d387fed5acc1226:3:drive.google.com:1 HTTP/1.1" ...
+            // 0 1            2            3      4                                    5                                6      ...      
             try{
                 if(b[4].equals("\"POST")){
                     String[] c = b[5].split("/");
+                    //   /WebTracker/1575244543769:d387fed5acc1226:3:drive.google.com:1
+                    // 0       1                             2
                     String[] d = c[2].split(":");
-                    if(!users.containsKey(d[1])){
+                    // 1575244543769:d387fed5acc1226:3:drive.google.com:1
+                    //       0              1        2         3        4
+                    if(!users.containsKey(d[1])){ // d[1] is the unique ID
                         ArrayList<String> a = new ArrayList<>();
                         users.put(d[1], a);
                     }
                     if(users.containsKey(d[1])){
+                        // now to store info of sites visited with all information
                         String e = d[0] + ":" + d[2] + ":" + d[4] + ":" + d[3];
                         //       timestamp     tabID       progress     website
                         //          0            1            2            3
@@ -32,11 +53,17 @@ public class parse{
             }
         }
         
+        /*
+        *   This part is to gather all information (percents, overlaps, number of sites visited, and most visited sites)
+        *   The outer loop iterates through each unique user encountered
+        *   Read the inner loop for better understanding
+        */
         HashMap<String, Double> percents = new HashMap<>();
         HashMap<String, ArrayList<Long>> overlaps = new HashMap<>();
         HashMap<String, ArrayList<Integer>> numSites = new HashMap<>();
         HashMap<String, HashMap<String, Integer>> top_sites = new HashMap<>();
         for(String user:users.keySet()){
+            // Initialization of variables for run through
             top_sites.put(user, new HashMap<String, Integer>());
             int countChange = 0;
             int countOverlap = 0;
@@ -46,26 +73,35 @@ public class parse{
             Long endLap = 0L;
             ArrayList<Long> time = new ArrayList<>();
             ArrayList<Integer> sitesPresent = new ArrayList<>();
+            /*
+            *   This loop will iterate through all website visited information
+            */
             for(int i=0; i<users.get(user).size(); i++){
                 String[] info = users.get(user).get(i).split(":");
-                if(info[2].equals("0")){
-                    open.remove(info[1]);
+                //       timestamp     tabID       progress     website
+                //          0            1            2            3
+                if(info[2].equals("0")){ 
+                    open.remove(info[1]); // site was closed/changed so no need to track
                 }
-                if(info.length < 4){
+                if(info.length < 4){ // an error check
                     continue;
                 }
 
                 if((open.size()>1) && (overlap == true) && (info[2].equals("1"))){
-                    countOverlap++;
+                    countOverlap++; 
+                    // checks to see if two sites are "ON" at the same time
                 }
                 
                 if((overlap == true) && (open.size()>1) && (Long.parseLong(info[0]) > (beginLap + 20000)) && (countOverlap == 2)){
                     overlap = false;
                     countOverlap = 0;
                     open.clear();
+                    // Removes all overlap counting since one site was never Loaded
                 }
 
                 if((info[3].equals("www.google.com")) && (info[2].equals("1"))){
+                    // google.com never sends a "Loaded" information so this is a way around now counting it
+                    // makes sense since google.com loads quickly
                     if(!top_sites.get(user).containsKey(info[3])){
                         top_sites.get(user).put(info[3], 1);
                     }
@@ -73,6 +109,7 @@ public class parse{
                         int temp = top_sites.get(user).get(info[3]) + 1;
                         top_sites.get(user).put(info[3], temp);
                     }
+                    System.out.println(open);
                     open.put(info[1], "closed");
                     countChange++;
                     continue;
@@ -132,6 +169,9 @@ public class parse{
         }
         System.out.println("");
 
+        /*
+        *   This loop is 
+        */
         for(String user: overlaps.keySet()){
             System.out.println("Number of overlaps for " + user + ": " + overlaps.get(user).size());
             // System.out.println(overlaps.get(user));
