@@ -117,7 +117,22 @@ public class parse{
                     countChange++;
                     continue;
                 }
-
+                /*
+                Need to find out how to remove undefined
+                if((info[3].equals("undefined")) && (info[2].equals("1"))){
+                    // duckduckgo.com also neversend a "Loaded" request
+                    if(!top_sites.get(user).containsKey(info[3])){
+                        top_sites.get(user).put(info[3], 1);
+                    }
+                    else{
+                        int temp = top_sites.get(user).get(info[3]) + 1;
+                        top_sites.get(user).put(info[3], temp);
+                    }
+                    open.remove(info[1]);
+                    countChange++;
+                    continue;
+                }
+                */
                 if((info[3].equals("duckduckgo.com")) && (info[2].equals("1"))){
                     // duckduckgo.com also neversend a "Loaded" request
                     if(!top_sites.get(user).containsKey(info[3])){
@@ -148,7 +163,7 @@ public class parse{
                 if(info[2].equals("2")){
                     try{
                         Double dt = Double.parseDouble(info[0]) - open.get(info[1]);
-                        if(dt > 10000){
+                        if(dt > 20000){
                             
                         }
                         else{
