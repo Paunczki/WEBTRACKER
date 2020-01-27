@@ -147,8 +147,14 @@ public class parse{
                 }
                 if(info[2].equals("2")){
                     try{
-                        totalDownloadTime += Double.parseDouble(info[0]) - open.get(info[1]);
-                        numDownloads++;
+                        Double dt = Double.parseDouble(info[0]) - open.get(info[1]);
+                        if(dt > 10000){
+                            
+                        }
+                        else{
+                            totalDownloadTime += dt;
+                            numDownloads++;
+                        }
                     }
                     catch(Exception e){}
                     open.remove(info[1]);
