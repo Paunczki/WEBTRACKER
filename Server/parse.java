@@ -62,17 +62,20 @@ public class parse{
         HashMap<String, ArrayList<Long>> overlaps = new HashMap<>();
         HashMap<String, ArrayList<Integer>> numSites = new HashMap<>();
         HashMap<String, HashMap<String, Integer>> top_sites = new HashMap<>();
+        HashMap<String, Double> downloadTime = new HashMap<>();
         for(String user:users.keySet()){
             // Initialization of variables for run through
             top_sites.put(user, new HashMap<String, Integer>());
             int countChange = 0;
             int countOverlap = 0;
             boolean overlap = false;
-            HashMap<String, String> open = new HashMap<>();
+            HashMap<String, Double> open = new HashMap<>();
             Long beginLap = 0L;
             Long endLap = 0L;
             ArrayList<Long> time = new ArrayList<>();
             ArrayList<Integer> sitesPresent = new ArrayList<>();
+            Double totalDownloadTime = 0.0;
+            Double numDownloads = 0.0;
             /*
             *   This loop will iterate through all website visited information
             */
@@ -139,10 +142,15 @@ public class parse{
                         top_sites.get(user).put(info[3], temp);
                     }
                     countChange++;
-                    open.put(info[1], "open");
+                    open.put(info[1], Double.parseDouble(info[0]));
                     // Puts this site as active (to see for overlap)
                 }
                 if(info[2].equals("2")){
+                    try{
+                        totalDownloadTime += Double.parseDouble(info[0]) - open.get(info[1]);
+                        numDownloads++;
+                    }
+                    catch(Exception e){}
                     open.remove(info[1]);
                     // removes site from active
                 }
@@ -176,6 +184,8 @@ public class parse{
             double percent = ((overlaps.get(user).size()-1)*100.0)/countChange;
             percents.put(user, percent);
             numSites.put(user, sitesPresent);
+            Double adt = (totalDownloadTime / numDownloads) / 1000.0;
+            downloadTime.put(user, adt);
         }
         System.out.println("");
 
@@ -259,6 +269,8 @@ public class parse{
                 }
             }
             System.out.println("Sites by number of visits: " + site_name);
+
+            System.out.println("Average Site Download time: " + downloadTime.get(user));
 
             System.out.println("");
         }
