@@ -11,7 +11,7 @@ import java.lang.Math;
 
 public class parse{
     // Change this filepath variable to log you want to use
-    static String filepath = "Server/Logs/all_results.log";
+    static String filepath = "Server/Logs/run.log";
     static File log = new File(filepath);
     public static void main(String[] args) throws FileNotFoundException{
         Scanner scanner = new Scanner(log);
@@ -117,22 +117,7 @@ public class parse{
                     countChange++;
                     continue;
                 }
-                /*
-                Need to find out how to remove undefined
-                if((info[3].equals("undefined")) && (info[2].equals("1"))){
-                    // duckduckgo.com also neversend a "Loaded" request
-                    if(!top_sites.get(user).containsKey(info[3])){
-                        top_sites.get(user).put(info[3], 1);
-                    }
-                    else{
-                        int temp = top_sites.get(user).get(info[3]) + 1;
-                        top_sites.get(user).put(info[3], temp);
-                    }
-                    open.remove(info[1]);
-                    countChange++;
-                    continue;
-                }
-                */
+
                 if((info[3].equals("duckduckgo.com")) && (info[2].equals("1"))){
                     // duckduckgo.com also neversend a "Loaded" request
                     if(!top_sites.get(user).containsKey(info[3])){
@@ -146,6 +131,7 @@ public class parse{
                     countChange++;
                     continue;
                 }
+                
                 if(info[2].equals("1")){
                     if(!top_sites.get(user).containsKey(info[3])){
                         // First time a site was visited for the unique ID
@@ -202,7 +188,7 @@ public class parse{
             // Now to save certain measurements to each unique user 
             // meant so I can print in the end
             overlaps.put(user, time);
-            double percent = ((overlaps.get(user).size()-1)*100.0)/countChange;
+            double percent = ((overlaps.get(user).size())*100.0)/countChange;
             percents.put(user, percent);
             numSites.put(user, sitesPresent);
             Double adt = (totalDownloadTime / numDownloads) / 1000.0;
@@ -233,8 +219,11 @@ public class parse{
             System.out.println("Average Time of overlaps was " + avg_time + " seconds");
 
             Collections.sort(for_median);
-            double median = for_median.get(for_median.size() / 2);
-            System.out.println("Median Time of overlaps was " + median + " seconds");
+            try{
+                double median = for_median.get(for_median.size() / 2);
+                System.out.println("Median Time of overlaps was " + median + " seconds");
+            }
+            catch(Exception e){}
 
             double tot_site_overlap = 0.0;
             for(int j=0; j<numSites.get(user).size(); j++){
