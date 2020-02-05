@@ -62,7 +62,7 @@ public class parse{
         HashMap<String, ArrayList<Long>> overlaps = new HashMap<>();
         HashMap<String, ArrayList<Integer>> numSites = new HashMap<>();
         HashMap<String, HashMap<String, Integer>> top_sites = new HashMap<>();
-        HashMap<String, Double> downloadTime = new HashMap<>();
+        HashMap<String, String> downloadTime = new HashMap<>();
         for(String user:users.keySet()){
             // Initialization of variables for run through
             top_sites.put(user, new HashMap<String, Integer>());
@@ -75,6 +75,7 @@ public class parse{
             ArrayList<Long> time = new ArrayList<>();
             ArrayList<Integer> sitesPresent = new ArrayList<>();
             Double totalDownloadTime = 0.0;
+            ArrayList<Double> medDownloadTime = new ArrayList<>();
             Double numDownloads = 0.0;
             /*
             *   This loop will iterate through all website visited information
@@ -154,6 +155,7 @@ public class parse{
                         }
                         else{
                             totalDownloadTime += dt;
+                            medDownloadTime.add(dt/1000.0);
                             numDownloads++;
                         }
                     }
@@ -192,7 +194,18 @@ public class parse{
             percents.put(user, percent);
             numSites.put(user, sitesPresent);
             Double adt = (totalDownloadTime / numDownloads) / 1000.0;
-            downloadTime.put(user, adt);
+            Collections.sort(medDownloadTime);
+            String stringADT = "Average Site Download time: " + adt + "\n";
+            String stringMDT =  "Median Site Download time: " + medDownloadTime.get(medDownloadTime.size()/2) + "\n";
+            double stand = 0.0;
+            for(int z=0; z<medDownloadTime.size(); z++){
+                // Do standard deviation
+                stand += Math.pow(medDownloadTime.get(z) - adt, 2);
+            }
+            double sdt = Math.sqrt(stand / medDownloadTime.size());
+            String stringSDDT = "Standard Deviation Site Download time: " + sdt;
+            String toPut = stringADT + stringMDT + stringSDDT;
+            downloadTime.put(user, toPut);
         }
         System.out.println("");
 
@@ -280,7 +293,7 @@ public class parse{
             }
             System.out.println("Sites by number of visits: " + site_name);
 
-            System.out.println("Average Site Download time: " + downloadTime.get(user));
+            System.out.println(downloadTime.get(user));
 
             System.out.println("");
         }
