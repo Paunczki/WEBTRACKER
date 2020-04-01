@@ -62,7 +62,8 @@ browser.storage.local.get('sS', function(status){
     switchStatus = status.sS;
 });
 
-var time = 1580536800000;
+var time = 1609480799000
+//var time = 1580536800000;
 // var time = 1572640140000;
 
 if(Date.now() > time){
