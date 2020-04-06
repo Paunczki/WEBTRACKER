@@ -14,6 +14,6 @@ If you need help on understanding or to work further on the project please conta
 
 
 ## Download Links
-For Google Chrome: https://bit.ly/32h9sDo
+For Google Chrome: https://webtracker.cs.luc.edu/WEBTRACKER_chrome.zip 
 
-For Mozilla Firefox: https://bit.ly/2C8qV6p
+For Mozilla Firefox: https://webtracker.cs.luc.edu/web_tracker-2.1-fx.xpi 
