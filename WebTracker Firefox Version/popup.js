@@ -2,8 +2,6 @@ $(function() {
     $("#togBtn").on('change', function(e) {
         if (e.target.checked){
             var time = 1609480799000
-            // var time = 1580536800000;
-            // var time = 1572641100000;
             if(Date.now() > time){
                 browser.storage.local.set({'sS': false}, function(){
                     browser.browserAction.setIcon({path: "iconGray.png"});
@@ -25,8 +23,6 @@ $(function() {
     });
 
     var time = 1609480799000
-    // var time = 1580536800000;
-    // var time = 1572641100000;
     if(Date.now() > time){
         browser.storage.local.set({'sS': false}, function(){});
         browser.browserAction.setIcon({path: "iconGray.png"});
