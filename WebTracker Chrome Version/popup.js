@@ -1,7 +1,8 @@
 $(function() {
     $("#togBtn").on('change', function(e) {
         if (e.target.checked){
-            var time = 1580536800000;
+            var time = 1609480799000
+            // var time = 1580536800000;
             // var time = 1572641100000;
             if(Date.now() > time){
                 chrome.storage.local.set({'sS': false}, function(){
@@ -23,7 +24,8 @@ $(function() {
         }   
     });
 
-    var time = 1580536800000;
+    var time = 1609480799000
+    // var time = 1580536800000;
     // var time = 1572641100000;
     if(Date.now() > time){
         chrome.storage.local.set({'sS': false}, function(){});
